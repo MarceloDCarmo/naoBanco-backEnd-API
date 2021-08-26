@@ -20,6 +20,7 @@
   "homepage": "https://github.com/MarceloDCarmo/naoBanco-backEnd-API#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.2",
     "ts-node-dev": "^1.1.8",

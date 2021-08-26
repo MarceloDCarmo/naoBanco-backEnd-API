@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { UsersRepositories } from "../repositories/UsersRepositories"
+import "express-async-errors";
 
 interface IUserRequest{
     name: string;

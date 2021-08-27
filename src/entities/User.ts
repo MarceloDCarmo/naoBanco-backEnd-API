@@ -22,6 +22,9 @@ class User {
     @UpdateDateColumn()
     updated_at: Date;
 
+    @Column()
+    password: string;
+
     constructor(){
         if(!this.id){ 
             this.id = uuid(); //ID auto-increment.

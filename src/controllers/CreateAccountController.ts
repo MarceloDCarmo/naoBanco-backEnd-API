@@ -12,7 +12,6 @@ class CreateAccountController {
 
         return res.status(201).json(account)
     }
-
 }
 
 export { CreateAccountController }

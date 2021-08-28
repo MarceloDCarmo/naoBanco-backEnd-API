@@ -9,7 +9,7 @@ export class CreateBankAccount1630019750063 implements MigrationInterface {
                 columns: [
                     {
                         name: "account_number",
-                        type: "int",
+                        type: "uuid",
                         isPrimary: true
                     },
                     {

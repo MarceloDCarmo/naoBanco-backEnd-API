@@ -29,9 +29,7 @@ class CreateAccountService {
             user
         })
 
-        await accountRepository.save(account)
-
-        return account
+        return await accountRepository.save(account)
     }
 
 }

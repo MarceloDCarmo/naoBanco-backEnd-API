@@ -24,6 +24,16 @@ export class Account {
     @Column()
     balance: number
 
+    deposit(value:number){
+        this.balance += value
+    }
+
+    withdraw(value:number){
+        if(this.balance >= value){
+            this.balance -= value
+        }
+    }
+
     constructor(){
         if(!this.account_number){
             this.account_number = uuid()

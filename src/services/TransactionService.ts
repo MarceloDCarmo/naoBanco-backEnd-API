@@ -47,12 +47,12 @@ class TransactionService {
         senderAcc.withdraw(value)
         receiverAcc.deposit(value)
 
-        const transaction = {
+        const transaction = transactionRepository.create({
             sender_account: sender,
             receiver_account: receiver,
-            value,
-            type
-        }
+            type,
+            value
+        })
 
         await accountRepository.save(senderAcc)
         await accountRepository.save(receiverAcc)

@@ -1,11 +1,11 @@
-import {Column, Entity, PrimaryColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, PrimaryColumn} from "typeorm";
 import { v4 as uuid } from "uuid"
 
-@Entity()
+@Entity("transactions")
 export class Transaction {
 
     @PrimaryColumn()
-    id: string
+    readonly id: string
 
     @Column()
     sender_account: string
@@ -15,6 +15,12 @@ export class Transaction {
 
     @Column()
     type: string
+
+    @Column()
+    value: number
+
+    @CreateDateColumn()
+    created_at: Date;
 
     constructor() {
         if(!this.id){

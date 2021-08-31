@@ -25,6 +25,6 @@ router.delete("/accounts/:accountNumber", (deleteAcccountController.handle))
 router.get("/accounts/:accountNumber/balance", getBalanceControler.handle)
 router.put("/deposit", depostiController.handle)
 router.post("/transfer", transactionController.executeTranfer)
-router.get("/transaction/:transactionId", transactionController.getTransaction)
+router.get("/transactions/:transactionId", transactionController.getTransaction)
 
 export { router };

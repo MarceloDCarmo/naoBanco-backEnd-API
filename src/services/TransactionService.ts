@@ -54,11 +54,10 @@ class TransactionService {
             type
         }
 
-        accountRepository.save(senderAcc)
-        accountRepository.save(receiverAcc)
-        transactionRepository.save(transaction)
+        await accountRepository.save(senderAcc)
+        await accountRepository.save(receiverAcc)
 
-        return transaction
+        return await transactionRepository.save(transaction)
     }
 
     isValidId(id:string){

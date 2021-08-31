@@ -4,16 +4,14 @@ import { DeleteAccountService } from "../services/DeleteAccountService"
 class DeleteAccountController {
 
     async handle(req:Request, res:Response){
-        const { account_number } = req.params
-
-        console.log(account_number)
+        const { accountNumber } = req.params
 
         const accountService = new DeleteAccountService()
 
-        const account = await accountService.execute(account_number)
+        const account = await accountService.execute(accountNumber)
 
         return res.status(200).json({
-            account_number: account_number,
+            account_number: accountNumber,
             status: "Deleted"
         })
     }

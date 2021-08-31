@@ -4,17 +4,17 @@ import { AccountRepository } from "../repositories/AccountRepository"
 
 class DeleteAccountService{
 
-    async execute(account_number:string){
+    async execute(accountNumber:string){
 
         const accountRepository = getCustomRepository(AccountRepository)
-        const accountExists = await accountRepository.findOne(account_number)
+        const accountExists = await accountRepository.findOne(accountNumber)
 
         if(!accountExists){
             throw new Error ("Account doesn't exists")
         }
 
         const result = await accountRepository.delete({
-            account_number:account_number
+            account_number:accountNumber
         })
 
         return result

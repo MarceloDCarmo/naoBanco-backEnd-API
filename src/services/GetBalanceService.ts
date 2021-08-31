@@ -6,7 +6,7 @@ class GetBalanceService {
     async execute(accountNumber:string) {
 
         if(!accountNumber){
-            throw new Error ("Account number is empty")
+            throw new Error ("Invalid account number")
         }
 
         const accountRepository = getCustomRepository(AccountRepository)

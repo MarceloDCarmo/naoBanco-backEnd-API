@@ -8,10 +8,10 @@ export class Transaction {
     readonly id: string
 
     @Column()
-    sender_account: string
+    sender_account: number
 
     @Column()
-    receiver_account: string
+    receiver_account: number
 
     @Column()
     type: string
@@ -20,11 +20,14 @@ export class Transaction {
     value: number
 
     @CreateDateColumn()
-    created_at: Date;
+    created_at: Date
 
     constructor() {
         if(!this.id){
             this.id = uuid()
+        }
+        if(!this.created_at){
+            this.created_at = new Date()
         }
     }
 }

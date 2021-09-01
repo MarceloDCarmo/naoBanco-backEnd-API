@@ -3,8 +3,8 @@ import { AccountRepository } from "../repositories/AccountRepository"
 import { TransactionRepository } from "../repositories/TransactionRepository"
 
 interface ITransaction {
-    sender:string,
-    receiver:string,
+    sender:number,
+    receiver:number,
     value:number,
     type:string
 }

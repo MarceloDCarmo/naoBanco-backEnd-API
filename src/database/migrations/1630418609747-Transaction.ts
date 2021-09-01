@@ -30,7 +30,7 @@ export class Transaction1630418609747 implements MigrationInterface {
                 {
                     name: "created_at",
                     type: "timestamp",
-                    default: "now()"
+                    //default: "now()"
                 }
             ],
             foreignKeys:[

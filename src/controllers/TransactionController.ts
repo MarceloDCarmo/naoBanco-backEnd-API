@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Transaction } from "../entities/Transaction";
 import { TransactionService } from "../services/TransactionService";
 
 class TransactionController {

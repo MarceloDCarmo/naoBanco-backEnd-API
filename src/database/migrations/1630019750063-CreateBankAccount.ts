@@ -9,8 +9,10 @@ export class CreateBankAccount1630019750063 implements MigrationInterface {
                 columns: [
                     {
                         name: "account_number",
-                        type: "uuid",
-                        isPrimary: true
+                        type: "integer",
+                        isPrimary: true,
+                        isGenerated: true,
+                        generationStrategy: "increment"
                     },
                     {
                         name: "nick",

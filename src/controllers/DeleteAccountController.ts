@@ -8,7 +8,7 @@ class DeleteAccountController {
 
         const accountService = new DeleteAccountService()
 
-        const account = await accountService.execute(accountNumber)
+        await accountService.execute(parseInt(accountNumber))
 
         return res.status(200).json({
             account_number: accountNumber,

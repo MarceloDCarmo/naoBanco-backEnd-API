@@ -6,7 +6,7 @@ class GetBalanceController {
         const getBalanceService = new GetBalanceService()
         const { accountNumber } = req.params
 
-        const balance = await getBalanceService.execute(accountNumber)
+        const balance = await getBalanceService.execute(parseInt(accountNumber))
 
         return res.status(200).json({
             account_number: accountNumber,

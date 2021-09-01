@@ -16,6 +16,10 @@ class DepositService {
         const accountRepository = getCustomRepository(AccountRepository)
         const account = await accountRepository.findOne(accountNumber)
 
+        if(!account){
+            throw new Error("Account doesn't exists")
+        }
+
         account.balance += value
 
         return await accountRepository.save(account)

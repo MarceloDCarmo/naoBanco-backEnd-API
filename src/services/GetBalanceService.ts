@@ -3,7 +3,7 @@ import { AccountRepository } from "../repositories/AccountRepository"
 
 
 class GetBalanceService {
-    async execute(accountNumber:string) {
+    async execute(accountNumber:number) {
 
         if(!accountNumber){
             throw new Error ("Invalid account number")

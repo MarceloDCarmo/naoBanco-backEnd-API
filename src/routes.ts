@@ -5,6 +5,7 @@ import { CreateUserController } from "./controllers/CreateUserController";
 import { DeleteAccountController } from "./controllers/DeleteAccountController";
 import { DepositController } from "./controllers/DepositController";
 import { GetBalanceController } from "./controllers/GetBalanceController";
+import { PixKeyCotroller } from "./controllers/PixKeyController";
 import { TransactionController } from "./controllers/TransactionController";
 
 const router = Router();
@@ -16,6 +17,7 @@ const deleteAcccountController = new DeleteAccountController()
 const getBalanceControler = new GetBalanceController()
 const depostiController = new DepositController()
 const transactionController = new TransactionController()
+const pixKeyController = new PixKeyCotroller()
 //router.post("/users", (request, response) => {} ) //Optional Method
 
 router.post("/users", (createUserController.handle));
@@ -26,5 +28,6 @@ router.get("/accounts/:accountNumber/balance", getBalanceControler.handle)
 router.put("/deposit", depostiController.handle)
 router.post("/transfer", transactionController.executeTranfer)
 router.get("/transactions/:transactionId", transactionController.getTransaction)
+router.post("/pixKey/random", pixKeyController.createRandomKey)
 
 export { router };

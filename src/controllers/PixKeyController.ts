@@ -7,7 +7,7 @@ class PixKeyCotroller{
         const pixService = new PixService()
         const { accountNumber } = req.body
 
-        const pixKey = pixService.createRandomKey(parseInt(accountNumber))
+        const pixKey = await pixService.createRandomKey(parseInt(accountNumber))
 
         return res.status(201).json(pixKey)
     }

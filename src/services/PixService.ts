@@ -40,7 +40,7 @@ class PixService{
             account: accountNumber
         })
 
-        return pixRepository.save(pixKey)
+        return await pixRepository.save(pixKey)
     }
 }
 

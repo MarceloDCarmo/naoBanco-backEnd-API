@@ -19,6 +19,17 @@ class PixKeyCotroller{
 
         return res.status(201).json(pixKey)
     }
+
+    async deleteKey(req: Request, res: Response){
+        const { pixKey } = req.body
+
+        pixService.deleteKey(pixKey)
+
+        return res.status(200).json({
+            pixKey,
+            status: "Deleted"
+        })
+    }
 }
 
 export { PixKeyCotroller }

@@ -74,6 +74,18 @@ class PixService{
         
         return await pixRepository.save(pixKey)
     }
+
+    async deleteKey(pixKey: string){
+        const pixRepository = getCustomRepository(PixRepository)
+        
+        const pixExists = await pixRepository.findOne(pixKey)
+        
+        if(!pixExists){
+            throw new Error("Pix key doesn't exists")
+        }
+
+        return await pixRepository.delete(pixKey)
+    }
 }
 
 export { PixService, PixRandomNumbers }

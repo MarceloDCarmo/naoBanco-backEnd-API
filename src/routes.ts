@@ -26,8 +26,10 @@ router.post("/accounts", (createAccountController.handle))
 router.delete("/accounts/:accountNumber", (deleteAcccountController.handle))
 router.get("/accounts/:accountNumber/balance", getBalanceControler.handle)
 router.put("/deposit", depostiController.handle)
-router.post("/transfer", transactionController.executeTranfer)
 router.get("/transactions/:transactionId", transactionController.getTransaction)
-router.post("/pixKey/random", pixKeyController.createRandomKey)
+router.post("/pixKeys/random", pixKeyController.createRandomKey)
+router.post("/pixKeys/email", pixKeyController.createEmailKey)
+router.post("/transfers/pix", transactionController.executePixTransfer)
+router.post("/transfers/ted", transactionController.executeTedTranfer)
 
 export { router };

@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm"
 import { PixRepository } from "../repositories/PixRepository"
 import { verifyAccount } from "../helpers/VerifyAccount"
+import { validate as emailIsValid } from "email-validator" 
 
 enum PixRandomNumbers {
     //RGF codes referent to the main color of some Banks
@@ -20,7 +21,7 @@ class PixService{
     async createRandomKey(accountNumber: number){
         const pixRepository = getCustomRepository(PixRepository)
         
-        verifyAccount(accountNumber)
+        await verifyAccount(accountNumber)
         
         let stringAccount = accountNumber.toString()
 
@@ -34,12 +35,43 @@ class PixService{
             pixString += PixRandomNumbers[parseInt(stringAccount.charAt(i))]
         }
 
+        const pixAlreadyExists = await pixRepository.findOne(pixString)
+
+        if(pixAlreadyExists){
+            throw new Error("Account already has random pix key")
+        }
+
         const pixKey = pixRepository.create({
             key: pixString,
             type: "random",
             account: accountNumber
         })
 
+        return await pixRepository.save(pixKey)
+    }
+
+    async createEmailKey(accountNumber: number, email: string){
+        
+        if(!emailIsValid(email)){
+            throw new Error("Invalid email")
+        }
+
+        await verifyAccount(accountNumber)
+
+        const pixRepository = getCustomRepository(PixRepository)
+
+        const emailKeyAlreadyExists = await pixRepository.findOne(email)
+
+        if(emailKeyAlreadyExists){
+            throw new Error("Email already used")
+        }
+
+        const pixKey = pixRepository.create({
+            key: email,
+            type: "email",
+            account: accountNumber
+        })
+        
         return await pixRepository.save(pixKey)
     }
 }

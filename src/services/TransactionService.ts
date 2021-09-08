@@ -1,10 +1,18 @@
 import { getCustomRepository } from "typeorm"
 import { AccountRepository } from "../repositories/AccountRepository"
+import { PixRepository } from "../repositories/PixRepository"
 import { TransactionRepository } from "../repositories/TransactionRepository"
 
 interface ITransaction {
     sender:number,
     receiver:number,
+    value:number,
+    type:string
+}
+
+interface ITransactionPix {
+    sender:number,
+    pixKey:string,
     value:number,
     type:string
 }
@@ -58,6 +66,41 @@ class TransactionService {
         await accountRepository.save(receiverAcc)
 
         return await transactionRepository.save(transaction)
+    }
+
+    async preparePixTransfer({sender, pixKey, value, type}:ITransactionPix) {
+        if(type != "pix"){
+            throw new Error("Unsupported transaction type")
+        }
+
+        const pixRepository = getCustomRepository(PixRepository)
+        const pixKeyExists = await pixRepository.findOne(pixKey)
+
+        if(!pixKeyExists){
+            throw new Error("Pix key doesn't exists")
+        }
+
+        const pixTransaction = await this.executeTransfer({
+            sender,
+            receiver: pixKeyExists.account,
+            value,
+            type
+        })
+
+        return pixTransaction
+    }
+
+    async prepareTedTransfer({sender, receiver, value, type}:ITransaction) {
+        if(type != "ted"){
+            throw new Error("Unsupported transaction type")
+        }
+
+        return await this.executeTransfer({
+            sender,
+            receiver, 
+            value, 
+            type
+        })
     }
 
     isValidId(id:string){

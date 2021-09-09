@@ -2,11 +2,14 @@ import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import { router } from "./routes";
-import "./database"; //From: index.ts (database)
+
+import swaggerUi from "swagger-ui-express"
+import swaggerDocs from "./swagger.json"
 
 const port = 3000
 const app = express()
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use(express.json());
 app.use(router);
 app.use((err: Error, request : Request, response : Response, next: NextFunction) => {

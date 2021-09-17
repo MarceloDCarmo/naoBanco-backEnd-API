@@ -1,10 +1,8 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
-import { CreateAccountController } from "./controllers/CreateAccountController";
+import { AccountController } from "./controllers/AccountController";
 import { CreateUserController } from "./controllers/CreateUserController";
-import { DeleteAccountController } from "./controllers/DeleteAccountController";
 import { DepositController } from "./controllers/DepositController";
-import { GetBalanceController } from "./controllers/GetBalanceController";
 import { PixKeyCotroller } from "./controllers/PixKeyController";
 import { TransactionController } from "./controllers/TransactionController";
 
@@ -12,9 +10,7 @@ const router = Router();
 
 const createUserController = new CreateUserController();
 const authenticateUserService = new AuthenticateUserController();
-const createAccountController = new CreateAccountController()
-const deleteAcccountController = new DeleteAccountController()
-const getBalanceControler = new GetBalanceController()
+const accountController = new AccountController()
 const depostiController = new DepositController()
 const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
@@ -22,9 +18,9 @@ const pixKeyController = new PixKeyCotroller()
 
 router.post("/users", (createUserController.handle));
 router.post("/login", (authenticateUserService.handle));
-router.post("/accounts", (createAccountController.handle))
-router.delete("/accounts/:accountNumber", (deleteAcccountController.handle))
-router.get("/accounts/:accountNumber/balance", getBalanceControler.handle)
+router.post("/accounts", (accountController.create))
+router.delete("/accounts/:accountNumber", (accountController.delete))
+router.get("/accounts/:accountNumber/balance", accountController.getBalance)
 router.put("/deposit", depostiController.handle)
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 router.post("/pixKeys/random", pixKeyController.createRandomKey)

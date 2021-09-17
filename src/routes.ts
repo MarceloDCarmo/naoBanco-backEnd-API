@@ -29,7 +29,6 @@ router.put("/deposit", depostiController.handle)
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 router.post("/pixKeys/random", pixKeyController.createRandomKey)
 router.post("/pixKeys/email", pixKeyController.createEmailKey)
-router.delete("/pixKeys", pixKeyController.deleteKey)
 router.post("/transfers/pix", transactionController.executePixTransfer)
 router.post("/transfers/ted", transactionController.executeTedTranfer)
 

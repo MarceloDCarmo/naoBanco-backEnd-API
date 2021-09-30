@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
 import { CreateAccountController } from "./controllers/CreateAccountController";
-import { CreateUserController } from "./controllers/CreateUserController";
-import { DeleteUserController } from "./controllers/DeleteUserController";
+import { UserController } from "./controllers/UserController";
 import { DeleteAccountController } from "./controllers/DeleteAccountController";
 import { DepositController } from "./controllers/DepositController";
 import { GetBalanceController } from "./controllers/GetBalanceController";
@@ -11,8 +10,7 @@ import { TransactionController } from "./controllers/TransactionController";
 
 const router = Router();
 
-const createUserController = new CreateUserController();
-const deleteUserController = new DeleteUserController();
+const userController = new UserController();
 const authenticateUserService = new AuthenticateUserController();
 const createAccountController = new CreateAccountController()
 const deleteAcccountController = new DeleteAccountController()
@@ -22,8 +20,8 @@ const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
 //router.post("/users", (request, response) => {} ) //Optional Method
 
-router.post("/users", (createUserController.handle));
-router.delete("/users", (deleteUserController.handle));
+router.post("/users", (userController.CreateNewUser));
+router.delete("/users", (userController.DeleteAlltoUser));
 router.post("/login", (authenticateUserService.handle));
 router.post("/accounts", (createAccountController.handle))
 router.delete("/accounts/:accountNumber", (deleteAcccountController.handle))

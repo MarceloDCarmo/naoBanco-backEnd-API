@@ -48,7 +48,7 @@ router.delete("/pixKeys", pixKeyController.deleteKey)
 
 //VirtualCR
 //router.post -> VirtualCreditCard
-//router.delete -> VirtualCreditCard
+//router.delete -> VirtualCreditCard ->new(billing)
 //router.path -> VirtualCreditCard -> Bloqued and unbloqued, change the limit.
 
 //CR System
@@ -73,5 +73,11 @@ router.delete("/pixKeys", pixKeyController.deleteKey)
 //router.post -> SavingMoney
 //router.path -> SavingMoney -> adjust seetings.
 //router.path -> GetMoneyBack
+
+//Billings
+//router.post -> Billing
+//router.get -> Billing -> By date (lançamentos futuros)
+//router.path -> Billing
+//router.delete -> Billing
 
 export { router };

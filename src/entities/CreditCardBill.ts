@@ -1,6 +1,6 @@
 import {Column, CreateDateColumn, Entity, PrimaryColumn, JoinColumn, OneToOne,} from "typeorm";
 import { Account } from "./Account";
-import { CreditCard } from "./CreditCard";
+import { CreditCard} from "./CreditCard";
 import { v4 as uuid } from "uuid"
 
 @Entity("CreditCardBill")
@@ -15,7 +15,7 @@ export class CreditCardBill {
 
     @JoinColumn({ name: "id" })
     @OneToOne(() => CreditCard)
-    _id: CreditCard
+    _cardid: CreditCard
 
     @CreateDateColumn()
     created_at: Date
@@ -24,7 +24,19 @@ export class CreditCardBill {
     establishment: string
 
     @Column()
-    value: number
+    total_value: number
+
+    @Column()
+    portion_value: number
+
+    @Column()
+    portion: number
+
+    @Column()
+    purchase_date: Date
+
+    @Column()
+    purchase_paydatee: Date
 
     constructor() {
         if(!this.id){

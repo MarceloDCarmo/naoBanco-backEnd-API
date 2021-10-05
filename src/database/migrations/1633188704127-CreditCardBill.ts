@@ -48,6 +48,10 @@ export class CreditCardBill1633188704127 implements MigrationInterface {
                     {
                         name: "purchase_paydate",
                         type: "timestamp",
+                    },
+                    {
+                        name: "last_digits",
+                        type: "integer",
                     }
 
                 ],

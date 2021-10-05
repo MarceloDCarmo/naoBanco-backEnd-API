@@ -38,6 +38,9 @@ export class CreditCardBill {
     @Column()
     purchase_paydatee: Date
 
+    @Column()
+    last_digits: number
+
     constructor() {
         if(!this.id){
             this.id = uuid()

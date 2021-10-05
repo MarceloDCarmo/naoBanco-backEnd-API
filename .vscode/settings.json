@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/00890539-11da-4629-bf21-f73f3dfea794/resourceGroups/NaoBanco/providers/Microsoft.Web/sites/NaoBancoAPI",
+    "appService.deploySubpath": "."
+}

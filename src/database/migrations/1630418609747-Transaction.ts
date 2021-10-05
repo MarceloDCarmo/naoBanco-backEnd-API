@@ -43,7 +43,7 @@ export class Transaction1630418609747 implements MigrationInterface {
                     onUpdate: "SET NULL"
                 },
                 {
-                    name: "FK_RECEIVEr_ACCOUNT",
+                    name: "FK_RECEIVER_ACCOUNT",
                     referencedTableName: "bank_account",
                     referencedColumnNames: ["account_number"],
                     columnNames: ["receiver_account"],

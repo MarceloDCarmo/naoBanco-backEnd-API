@@ -20,13 +20,13 @@ class AuthenticateUserService{
             email
         });
         if(!user){
-            throw new Error("Email or Passord incorrect")
+            throw new Error("Email or Password incorrect")
         }
 
         //Check Password
         const passwordMatch = await compare(password, user.password);
         if(!passwordMatch){
-            throw new Error("Email or Passord incorrect")
+            throw new Error("Email or Password incorrect")
         }
 
         //Gen Token

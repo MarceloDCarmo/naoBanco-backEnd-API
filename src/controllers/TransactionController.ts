@@ -67,6 +67,16 @@ class TransactionController {
         return res.status(200).json(transactionDTO)
     }
 
+    
+    async executeBoletoDeposit(req:Request, res:Response) {
+        const { boletoNumber, payingAccount } = req.body
+        const transactionService = new TransactionService()
+
+        const boleto = await transactionService.boletoDeposit(boletoNumber, payingAccount)
+
+        return res.status(200).json(boleto)
+    }
+
     // async executeTransfer(req: Request, res: Response) {
     
     //     const { type } = req.body

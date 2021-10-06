@@ -4,7 +4,7 @@ class BoletoHelper {
         let boletoNumber:string
         
         boletoNumber = 'BOL923571113171923293137'
-        boletoNumber = boletoNumber.concat(issuerAccount.toString())
+        boletoNumber = boletoNumber.concat(issuerAccount.toString().padStart(5, '0'))
         boletoNumber = boletoNumber.concat('7')
 
         const baseDate = new Date(1997, 10, 7)

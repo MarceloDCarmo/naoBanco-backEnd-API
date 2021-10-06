@@ -28,8 +28,12 @@ router.get("/accounts/:accountNumber/balance", accountController.getBalance)
 //roter.get("/accounts -> Show account list to user.
 //roter.path("/accounts/settings -> Change nick or password.
 
+//Boleto
+router.post("/generateBoleto", depostiController.generateDepositBoleto)
+
 //Transactions
-router.put("/deposit", depostiController.handle) //Isso seria um "Doc"?
+router.put("/depositTest", depostiController.deposit) //Endpoint to desposit values in accounts for tests
+router.post("/deposit", transactionController.executeBoletoDeposit)  //deposit with boleto
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 //router.get("/transactions/type"
 //router.get("/transactions/date"

@@ -103,6 +103,27 @@ class TransactionService {
         })
     }
 
+    async boletoDeposit(boleto:string, payingAccount:number){
+
+        const dueFactor = boleto.substring(30, 34)
+        const baseDate = new Date(1997, 10, 7).getTime()
+        const dueDate = new Date(baseDate + (parseInt(dueFactor) * 86400000)) //days to milliseconds
+
+        if((dueDate.getTime() - Date.now()) < 0){
+            throw new Error("Boleto is expired")
+        }
+
+        const issuerAccount = parseInt(boleto.substring(24, 29))
+        console.log("Conta: ", issuerAccount)
+        const value = parseInt(boleto.substring(34))
+        console.log("Valor: ", value)
+
+        const transactionService = new TransactionService()
+
+        return await transactionService.executeTransfer({ sender: payingAccount, receiver: issuerAccount, value, type: "boleto" })
+    
+    }
+
     isValidId(id:string){
         if(!id){
             throw new Error("Invalid transaction id")

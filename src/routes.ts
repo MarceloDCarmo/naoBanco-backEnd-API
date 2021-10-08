@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
 import { CreateAccountController } from "./controllers/CreateAccountController";
+import { CreditCardController } from "./controllers/CreditCardController";
 import { UserController } from "./controllers/UserController";
 import { DeleteAccountController } from "./controllers/DeleteAccountController";
 import { DepositController } from "./controllers/DepositController";
@@ -13,6 +14,7 @@ const router = Router();
 const userController = new UserController();
 const authenticateUserService = new AuthenticateUserController();
 const createAccountController = new CreateAccountController()
+const CreditCardService = new CreditCardController()
 const deleteAcccountController = new DeleteAccountController()
 const getBalanceControler = new GetBalanceController()
 const depostiController = new DepositController()
@@ -47,9 +49,11 @@ router.post("/pixKeys/email", pixKeyController.createEmailKey)
 router.delete("/pixKeys", pixKeyController.deleteKey)
 
 //VirtualCR
-//router.post -> VirtualCreditCard
-//router.delete -> VirtualCreditCard ->new(billing)
-//router.path -> VirtualCreditCard -> Bloqued and unbloqued, change the limit.
+router.get("/cc/:accountNumber", CreditCardService.GetCreditCard)
+router.post("/cc", CreditCardService.NewCreditCard)
+router.delete("/cc", CreditCardService.DeleteCreditCard) //-> CreditCard ->new(billing)
+router.patch("/cc", CreditCardService.ChangeCreditCardLimit)//
+router.patch("/cc/block", CreditCardService.BlockCreditCard)
 
 //CR System
 //router.post -> PurchaseCR

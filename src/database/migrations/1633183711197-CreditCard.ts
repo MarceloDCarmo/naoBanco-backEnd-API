@@ -34,14 +34,16 @@ export class CreditCard1633183711197 implements MigrationInterface {
                         type: "integer"
                     },
                     {
+                        name: "password_cr",
+                        type: "integer"
+                    },
+                    {
                         name: "card_validate",
                         type: "timestamp"
-                        //default: "now() + 5 Years"
                     },
                     {
                         name: "max_limit",
                         type: "integer",
-                        //default: 10000
                     },
                     {
                         name: "actual_limit",
@@ -65,16 +67,16 @@ export class CreditCard1633183711197 implements MigrationInterface {
                         default: "now()"
                     }
                 ],
-                foreignKeys:[
-                    {
-                        name: "FK_ACCOUNT",
-                        referencedTableName: "bank_account",
-                        referencedColumnNames: ["account_number"],
-                        columnNames: ["account"],
-                        onDelete: "SET NULL",
-                        onUpdate: "SET NULL"
-                    },
-                ]
+                // foreignKeys:[
+                //     {
+                //         name: "FK_ACCOUNT",
+                //         referencedTableName: "bank_account",
+                //         referencedColumnNames: ["account_number"],
+                //         columnNames: ["account_number"],
+                //         onDelete: "SET NULL",
+                //         onUpdate: "SET NULL"
+                //     },
+                // ]
             })
         )
     }

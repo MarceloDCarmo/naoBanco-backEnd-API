@@ -1,11 +1,9 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
-import { CreateAccountController } from "./controllers/CreateAccountController";
 import { CreditCardController } from "./controllers/CreditCardController";
+import { AccountController } from "./controllers/AccountController";
 import { UserController } from "./controllers/UserController";
-import { DeleteAccountController } from "./controllers/DeleteAccountController";
 import { DepositController } from "./controllers/DepositController";
-import { GetBalanceController } from "./controllers/GetBalanceController";
 import { PixKeyCotroller } from "./controllers/PixKeyController";
 import { TransactionController } from "./controllers/TransactionController";
 
@@ -13,10 +11,8 @@ const router = Router();
 
 const userController = new UserController();
 const authenticateUserService = new AuthenticateUserController();
-const createAccountController = new CreateAccountController()
 const CreditCardService = new CreditCardController()
-const deleteAcccountController = new DeleteAccountController()
-const getBalanceControler = new GetBalanceController()
+const accountController = new AccountController()
 const depostiController = new DepositController()
 const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
@@ -28,14 +24,18 @@ router.delete("/users", (userController.DeleteAlltoUser));
 router.post("/login", (authenticateUserService.handle));
 
 //Account
-router.post("/accounts", (createAccountController.handle))
-router.delete("/accounts/:accountNumber", (deleteAcccountController.handle))
-router.get("/accounts/:accountNumber/balance", getBalanceControler.handle)
+router.post("/accounts", accountController.create)
+router.delete("/accounts/:accountNumber", accountController.delete)
+router.get("/accounts/:accountNumber/balance", accountController.getBalance)
 //roter.get("/accounts -> Show account list to user.
 //roter.path("/accounts/settings -> Change nick or password.
 
+//Boleto
+router.post("/generateBoleto", depostiController.generateDepositBoleto)
+
 //Transactions
-router.put("/deposit", depostiController.handle) //Isso seria um "Doc"?
+router.put("/depositTest", depostiController.deposit) //Endpoint to desposit values in accounts for tests
+router.post("/deposit", transactionController.executeBoletoDeposit)  //deposit with boleto
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 //router.get("/transactions/type"
 //router.get("/transactions/date"

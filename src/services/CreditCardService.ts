@@ -85,11 +85,12 @@ class CreditCardService {
             return "Credit Card Deleted"
         }catch(e)
         {
+            console.log(e.message)
             return "error: " + e.message;
         }
     }
 
-    async ChangeCreditCardLimit(cardnumber:number, newLimit: number){
+    async ChangeCreditCardUserLimit(cardnumber:number, newUserLimit: number){
         try{
             const creditCardRepository = getCustomRepository(CreditCardRepository);
             const cardNumberIsValid = await creditCardRepository.findOne({ where:
@@ -98,14 +99,44 @@ class CreditCardService {
             if(!cardNumberIsValid){
                 throw new Error ("Credit Card doesn't exists")
             }
-    
-            const result = await creditCardRepository.save({
-                card_number: cardnumber,
-                actual_limit: newLimit
-            })
-            return result
+            console.log(cardNumberIsValid.max_limit )
+            console.log(newUserLimit)
+            if(cardNumberIsValid.max_limit < newUserLimit){
+                return "New Actual limit is above ou equals the MaxLimit.";
+            }else{
+                const result = await creditCardRepository.save({
+                    id: cardNumberIsValid.id,
+                    card_number: cardnumber,
+                    actual_limit: newUserLimit
+                })
+                return result
+            }
         }catch(e)
         {
+            console.log(e.message)
+            return "error: " + e.message;
+        }
+    }
+
+    async ChangeCreditCardMaxLimit(cardnumber:number, newMaxLimit: number){
+        try{
+            const creditCardRepository = getCustomRepository(CreditCardRepository);
+            const cardNumberIsValid = await creditCardRepository.findOne({ where:
+                { card_number: cardnumber }
+            })
+            if(!cardNumberIsValid){
+                throw new Error ("Credit Card doesn't exists")
+            }
+            const result = await creditCardRepository.save({
+                id: cardNumberIsValid.id,
+                card_number: cardnumber,
+                max_limit: newMaxLimit
+            })
+            return result
+
+        }catch(e)
+        {
+            console.log(e.message)
             return "error: " + e.message;
         }
     }
@@ -127,6 +158,7 @@ class CreditCardService {
             return result
         }catch(e)
         {
+            console.log(e.message)
             return "error: " + e.message;
         }
     }
@@ -150,6 +182,7 @@ class CreditCardService {
             }
         }catch(e)
         {
+            console.log(e.message)
             return "error: " + e.message;
         }
     }

@@ -20,12 +20,21 @@ class CreditCardController {
 
     }
 
-    async ChangeCreditCardLimit(req: Request, res: Response){
+    async ChangeCreditCardUserLimit(req: Request, res: Response){
 
-        const {card_number, newLimit} = req.body;
+        const {card_number, newUserLimit} = req.body;
         const creditCardService = new CreditCardService()
-        const creditCardToChange = await creditCardService.ChangeCreditCardLimit(card_number, newLimit)
-        return res.status(200).json(creditCardToChange);
+        const creditCardToChangeUserLimit = await creditCardService.ChangeCreditCardUserLimit(card_number, newUserLimit)
+        return res.json(creditCardToChangeUserLimit);
+    }
+
+    
+    async ChangeCreditCardMaxLimit(req: Request, res: Response){
+
+        const {card_number, newMaxLimit} = req.body;
+        const creditCardService = new CreditCardService()
+        const creditCardToChangeMaxLimit = await creditCardService.ChangeCreditCardMaxLimit(card_number, newMaxLimit)
+        return res.json(creditCardToChangeMaxLimit);
     }
 
     async BlockCreditCard(req: Request, res: Response){
@@ -33,7 +42,7 @@ class CreditCardController {
         const {card_number, card_status} = req.body;
         const creditCardService = new CreditCardService()
         const creditCardToBlock = await creditCardService.BlockCreditCard(card_number, card_status)
-        return res.status(200).json(creditCardToBlock);
+        return res.json(creditCardToBlock);
     }
 
     async GetCreditCard(req: Request, res: Response){

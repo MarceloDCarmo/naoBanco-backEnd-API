@@ -52,7 +52,8 @@ router.delete("/pixKeys", pixKeyController.deleteKey)
 router.get("/cc/:accountNumber", CreditCardService.GetCreditCard)
 router.post("/cc", CreditCardService.NewCreditCard)
 router.delete("/cc", CreditCardService.DeleteCreditCard) //-> CreditCard ->new(billing)
-router.patch("/cc", CreditCardService.ChangeCreditCardLimit)//
+router.patch("/cc/userlimit", CreditCardService.ChangeCreditCardUserLimit)//
+router.patch("/cc/maxlimit", CreditCardService.ChangeCreditCardMaxLimit)//
 router.patch("/cc/block", CreditCardService.BlockCreditCard)
 
 //CR System

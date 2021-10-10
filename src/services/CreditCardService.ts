@@ -66,7 +66,7 @@ class CreditCardService {
         return newCreditCard;
 
     }
-
+    
     async DeleteCreditCard(card_number:number){
         try{
             const creditCardRepository = getCustomRepository(CreditCardRepository);
@@ -180,6 +180,58 @@ class CreditCardService {
                 console.log(creditCard.card_number)
                 return creditCard
             }
+        }catch(e)
+        {
+            console.log(e.message)
+            return "error: " + e.message;
+        }
+    }
+
+    async GetCreditCardTotalBill(account_number:number){
+        try{
+            const creditCardRepository = getCustomRepository(CreditCardRepository);
+            console.log(account_number)
+
+            const creditCard = await creditCardRepository.findOne(
+                { where:
+                    { account: account_number }
+                }
+            )
+            if(!creditCard){
+                return "Account don't have a Credit Card"
+            }
+            else
+            {
+                console.log(creditCard.card_number)
+                return creditCard.actual_bill
+            }
+        }catch(e)
+        {
+            console.log(e.message)
+            return "error: " + e.message;
+        }
+    }
+
+    async ChangeCreditCardPayday(cardnumber:number, newPayday: number){
+        try{
+            const creditCardRepository = getCustomRepository(CreditCardRepository);
+            const cardNumberIsValid = await creditCardRepository.findOne({ where:
+                { card_number: cardnumber }
+            })
+            if(!cardNumberIsValid){
+                throw new Error ("Credit Card doesn't exists")
+            }
+            console.log(cardNumberIsValid.payday )
+            console.log(newPayday)
+            const newPaydayBill = await paydayDateGen(newPayday);
+            console.log(newPaydayBill)
+            const result = await creditCardRepository.save({
+                id: cardNumberIsValid.id,
+                card_number: cardnumber,
+                payday: newPayday,
+                next_payday: newPaydayBill
+            })
+            return result
         }catch(e)
         {
             console.log(e.message)

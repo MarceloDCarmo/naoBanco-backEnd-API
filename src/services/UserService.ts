@@ -6,10 +6,6 @@ import { PixRepository } from "../repositories/PixRepository"
 import { hash } from "bcryptjs"
 import "express-async-errors";
 
-interface IDeleteUserRequest{
-    email: string;
-}
-
 interface IUserRequest{
     name: string;
     email: string;
@@ -46,13 +42,10 @@ class UserService {
         return user;
     }
 
-    async DeleteUserAndALL({email} : IDeleteUserRequest) {
+    async DeleteUserAndALL(email : string) {
         const userRepository = getCustomRepository(UsersRepositories);
         try
         { //Validation for e-mail account.
-            if(!email){
-                throw new Error("Email Incorrect");
-            }
             const user = await userRepository.findOne({email});
             if(!user){
                 throw new Error("User no exists");
@@ -148,6 +141,67 @@ class UserService {
         catch(e) {
             console.log(`Error: ${e.message}`); 
             throw new Error("Unable to delete user: " + e.message);
+        }
+    }
+
+    async updateUser(email : string, attribute: string, value: string) {
+        try
+        { 
+            //Get User
+            const userRepository = getCustomRepository(UsersRepositories);
+            const user = await userRepository.findOne({email});
+            if(!user){
+                throw new Error("User not found");
+            }
+
+            let userToUpdate = user;
+            userToUpdate.updated_at = new Date();
+
+            switch(attribute){
+                case 'name':
+                    userToUpdate.name = value;
+                    break;
+                case 'email':
+                    userToUpdate.email = value;
+                    break;
+                case 'admin':
+                    if(value === 'true'){
+                        userToUpdate.admin = true;
+                    }else{
+                        userToUpdate.admin = false;
+                    }
+                    break;
+                case 'password':
+                    const passwordHash = await hash(value, 8);
+                    userToUpdate.email = passwordHash;
+                    break;
+            }
+
+            const result = await userRepository.save(userToUpdate)
+            return result
+            
+        }
+        catch(e) {
+            console.log(`Error: ${e.message}`); 
+            throw new Error("Unable to update: " + e.message);
+        }
+    }
+
+    async getUser(email: string) {
+        try
+        { 
+            //Get User
+            const userRepository = getCustomRepository(UsersRepositories);
+            const user = await userRepository.findOne({email});
+            if(!user){
+                throw new Error("User not found");
+            }
+            return user;
+            
+        }
+        catch(e) {
+            console.log(`Error: ${e.message}`); 
+            throw new Error("Unable to get user: " + e.message);
         }
     }
 }

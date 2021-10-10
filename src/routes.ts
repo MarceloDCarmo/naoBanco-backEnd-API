@@ -18,9 +18,10 @@ const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
 
 //User
-router.post("/users", (userController.CreateNewUser));
-router.delete("/users", (userController.DeleteAlltoUser));
-//roter.path("/users/settings
+router.post("/user", (userController.CreateNewUser));
+router.delete("/user", (userController.DeleteAlltoUser));
+router.patch("/user/settings", (userController.updateUser));
+router.get("/user/:email", (userController.getUser));
 router.post("/login", (authenticateUserService.handle));
 
 //Account
@@ -50,11 +51,13 @@ router.delete("/pixKeys", pixKeyController.deleteKey)
 
 //VirtualCR
 router.get("/cc/:accountNumber", CreditCardService.GetCreditCard)
+router.get("/cc/bill/:accountNumber", CreditCardService.GetCreditCardTotalBill)
 router.post("/cc", CreditCardService.NewCreditCard)
 router.delete("/cc", CreditCardService.DeleteCreditCard) //-> CreditCard ->new(billing)
 router.patch("/cc/userlimit", CreditCardService.ChangeCreditCardUserLimit)//
 router.patch("/cc/maxlimit", CreditCardService.ChangeCreditCardMaxLimit)//
 router.patch("/cc/block", CreditCardService.BlockCreditCard)
+router.patch("/cc/payday", CreditCardService.ChangeCreditCardPayday)
 
 //CR System
 //router.post -> PurchaseCR

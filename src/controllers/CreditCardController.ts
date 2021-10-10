@@ -27,8 +27,7 @@ class CreditCardController {
         const creditCardToChangeUserLimit = await creditCardService.ChangeCreditCardUserLimit(card_number, newUserLimit)
         return res.json(creditCardToChangeUserLimit);
     }
-
-    
+ 
     async ChangeCreditCardMaxLimit(req: Request, res: Response){
 
         const {card_number, newMaxLimit} = req.body;
@@ -51,6 +50,22 @@ class CreditCardController {
         const creditCardService = new CreditCardService()
         const getCreditCard = await creditCardService.GetCreditCard(parseInt(accountNumber))
         return res.json(getCreditCard);
+    }
+
+    async GetCreditCardTotalBill(req: Request, res: Response){
+
+        const {accountNumber} = req.params;
+        const creditCardService = new CreditCardService()
+        const getCreditTotalBill = await creditCardService.GetCreditCardTotalBill(parseInt(accountNumber))
+        return res.json(getCreditTotalBill);
+    }
+    
+    async ChangeCreditCardPayday(req: Request, res: Response){
+
+        const {card_number, newPayday} = req.body;
+        const creditCardService = new CreditCardService()
+        const creditCardToChangePayday = await creditCardService.ChangeCreditCardPayday(card_number, newPayday)
+        return res.json(creditCardToChangePayday);
     }
 }
 

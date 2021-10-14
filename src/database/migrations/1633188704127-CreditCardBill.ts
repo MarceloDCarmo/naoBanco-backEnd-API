@@ -34,12 +34,12 @@ export class CreditCardBill1633188704127 implements MigrationInterface {
                         type: "integer"
                     },
                     {
-                        name: "portion_value",
-                        type: "integer"
-                    },
-                    {
                         name: "portion",
                         type: "integer",
+                    },
+                    {
+                        name: "portion_value",
+                        type: "integer"
                     },
                     {
                         name: "purchase_date",

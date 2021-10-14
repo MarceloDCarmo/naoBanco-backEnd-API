@@ -9,13 +9,17 @@ export class CreditCardBill {
     @PrimaryColumn()
     readonly id: string
 
-    @JoinColumn({ name: "account_number" })
-    @OneToOne(() => Account)
-    _account: Account
+    @Column()
+    account_Number: number
+    // @JoinColumn({ name: "account_number" })
+    // @OneToOne(() => Account)
+    // _account: Account
 
-    @JoinColumn({ name: "id" })
-    @OneToOne(() => CreditCard)
-    _cardid: CreditCard
+    @Column()
+    cardId: string
+    // @JoinColumn({ name: "id" })
+    // @OneToOne(() => CreditCard)
+    // _cardid: CreditCard
 
     @CreateDateColumn()
     created_at: Date
@@ -27,16 +31,16 @@ export class CreditCardBill {
     total_value: number
 
     @Column()
-    portion_value: number
-
-    @Column()
     portion: number
 
     @Column()
+    portion_value: number
+
+    @CreateDateColumn()
     purchase_date: Date
 
-    @Column()
-    purchase_paydatee: Date
+    @CreateDateColumn()
+    purchase_paydate: Date
 
     @Column()
     last_digits: number

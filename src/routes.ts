@@ -38,8 +38,8 @@ router.post("/generateBoleto", depostiController.generateDepositBoleto)
 router.put("/depositTest", depostiController.deposit) //Endpoint to desposit values in accounts for tests
 router.post("/deposit", transactionController.executeBoletoDeposit)  //deposit with boleto
 router.get("/transactions/:transactionId", transactionController.getTransaction)
-//router.get("/transactions/type"
-//router.get("/transactions/date"
+router.get("/transactions/:accountNumber/:date", transactionController.getTransactionsByDate)
+router.get("/transactions/:accountNumber/:startDate/:endDate", transactionController.getTransactionsByRangeDate)
 //router.get("/transactions/rangedate ("with limit, Max 90 days")
 router.post("/transfers/ted", transactionController.executeTedTranfer)
 router.post("/transfers/pix", transactionController.executePixTransfer)

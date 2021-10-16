@@ -32,6 +32,26 @@ class TransactionService {
         return transaction
     }
 
+    async getTransactionsByDate(accountNumber:number, timestamp:number){
+        const transactionRepository = getCustomRepository(TransactionRepository)
+
+        const start = new Date(timestamp).setUTCHours(0, 0, 0, 0)
+        const end = new Date(timestamp).setUTCHours(23, 59, 59, 999)
+
+        return await transactionRepository.findByDate(accountNumber, start, end)
+
+    }
+
+    async getTransactionsByRangeDate(accountNumber:number, timestampStart:number, timestampEnd:number){
+        const transactionRepository = getCustomRepository(TransactionRepository)
+
+        const start = new Date(timestampStart).setUTCHours(0, 0, 0, 0)
+        const end = new Date(timestampEnd).setUTCHours(23, 59, 59, 999)
+
+        return await transactionRepository.findByDate(accountNumber, start, end)
+
+    }
+
     async executeTransfer({sender, receiver, value, type}:ITransaction) {
         const accountRepository = getCustomRepository(AccountRepository)
         const transactionRepository = getCustomRepository(TransactionRepository)
@@ -117,13 +137,11 @@ class TransactionService {
         console.log("Conta: ", issuerAccount)
         const value = parseInt(boleto.substring(34))
         console.log("Valor: ", value)
-
-        const transactionService = new TransactionService()
-
-        return await transactionService.executeTransfer({ sender: payingAccount, receiver: issuerAccount, value, type: "boleto" })
-    
+        
+        return await this.executeTransfer({ sender: payingAccount, receiver: issuerAccount, value, type: "boleto" })
+        
     }
-
+    
     isValidId(id:string){
         if(!id){
             throw new Error("Invalid transaction id")

@@ -34,6 +34,14 @@ export class Account {
         }
     }
 
+    setPassword(password:string){
+        this.password = password
+    }
+
+    setNick(nick:string){
+        this.nick = nick
+    }
+
     constructor(){
         // if(!this.account_number){
         //     this.account_number = uuid()

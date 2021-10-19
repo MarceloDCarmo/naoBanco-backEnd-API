@@ -28,8 +28,8 @@ router.post("/login", (authenticateUserService.handle));
 router.post("/accounts", accountController.create)
 router.delete("/accounts/:accountNumber", accountController.delete)
 router.get("/accounts/:accountNumber/balance", accountController.getBalance)
-//roter.get("/accounts -> Show account list to user.
-//roter.path("/accounts/settings -> Change nick or password.
+router.patch("/accounts/changePass", accountController.changePassword)
+router.patch("/accounts/changeNick", accountController.changeNick)
 
 //Boleto
 router.post("/generateBoleto", depostiController.generateDepositBoleto)

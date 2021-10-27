@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ReportEmitErrorSummary } from "typescript";
 import { PixService } from "../services/PixService";
 
 const pixService = new PixService()
@@ -23,12 +24,20 @@ class PixKeyCotroller{
     async deleteKey(req: Request, res: Response){
         const { pixKey } = req.body
 
-        pixService.deleteKey(pixKey)
+        await pixService.deleteKey(pixKey)
 
         return res.status(200).json({
             pixKey,
             status: "Deleted"
         })
+    }
+
+    async getKeysByAccount(req: Request, res: Response){
+        const { accountNumber } = req.params
+
+        const keys = await pixService.getKeysByAccount(parseInt(accountNumber))
+
+        return res.status(200).json(keys)
     }
 }
 

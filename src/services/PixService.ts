@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm"
 import { PixRepository } from "../repositories/PixRepository"
 import { verifyAccount } from "../helpers/VerifyAccount"
 import { validate as emailIsValid } from "email-validator" 
+import { verify } from "jsonwebtoken"
 
 enum PixRandomNumbers {
     //RGF codes referent to the main color of some Banks
@@ -85,6 +86,17 @@ class PixService{
         }
 
         return await pixRepository.delete(pixKey)
+    }
+
+    async getKeysByAccount(accoutnNumber: number) {
+        
+        verifyAccount(accoutnNumber)
+
+        const pixRepository = getCustomRepository(PixRepository)
+
+        const keys = pixRepository.findKeysByAccount(accoutnNumber)
+
+        return keys
     }
 }
 

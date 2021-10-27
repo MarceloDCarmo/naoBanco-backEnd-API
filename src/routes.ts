@@ -52,6 +52,7 @@ router.post("/transfers/ted", transactionController.executeTedTranfer)
 router.post("/transfers/pix", transactionController.executePixTransfer)
 
 //Pix
+router.get("/pixKeys/:accountNumber", pixKeyController.getKeysByAccount)
 router.post("/pixKeys/random", pixKeyController.createRandomKey)
 router.post("/pixKeys/email", pixKeyController.createEmailKey)
 router.delete("/pixKeys", pixKeyController.deleteKey)

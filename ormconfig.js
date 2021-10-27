@@ -1,8 +1,8 @@
-{
+module.exports = {
     "type": "sqlite",
     "database": "src/database/database.sqlite",
-    "migrations": ["dist/database/migrations/*.js"],
-    "entities": ["dist/entities/*.js"],
+    "migrations": [process.env.MIGRATIONS],
+    "entities": [process.env.ENTITIES],
     "cli": {
         "migrationsDir": "src/database/migrations",
         "entitiesDir": "src/entities"

@@ -30,6 +30,7 @@ router.get("/user/:email", (userController.getUser));
 router.post("/login", (authenticateUserService.handle));
 
 //Account
+router.get("/accounts/:accountNumber", accountController.getAccount)
 router.post("/accounts", accountController.create)
 router.delete("/accounts/:accountNumber", accountController.delete)
 router.get("/accounts/:accountNumber/balance", accountController.getBalance)

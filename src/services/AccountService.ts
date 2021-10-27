@@ -9,9 +9,15 @@ interface IAccount {
     user: string
 }
 
-
-
 class AccountService {
+
+    async getAccount(accountNumber: number) {
+        const accountRepository = getCustomRepository(AccountRepository)
+
+        const account = await accountRepository.findOne(accountNumber)
+
+        return account
+    }
 
     async create({ nick, password, user }: IAccount) {
         const usersRepository = getCustomRepository(UsersRepositories)
@@ -90,8 +96,8 @@ class AccountService {
         return await accountRepository.save(account)
     }
 
-    async changeNick(accountNumber:number, newNick:string){
-        
+    async changeNick(accountNumber: number, newNick: string) {
+
         const accountRepository = getCustomRepository(AccountRepository)
         const account = await accountRepository.findOne(accountNumber)
 

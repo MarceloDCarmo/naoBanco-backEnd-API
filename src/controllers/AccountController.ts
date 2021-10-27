@@ -58,6 +58,14 @@ class AccountController {
             message: "Nick changed"
         })
     }
+
+    async getAccount(req: Request, res: Response) {
+        const { accountNumber } = req.params
+
+        const account = await accountService.getAccount(parseInt(accountNumber))
+
+        return res.status(200).json(account)
+    }
 }
 
 export { AccountController }

@@ -8,13 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"ts-node-dev src/server.ts\" \"tsoa spec\"",
+    "dev": "ts-node-dev src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "start": "node build/index.js",
-    "predev": "npm run swagger",
-    "prebuild": "npm run swagger",
-    "build": "tsc",
-    "swagger": "tsoa spec"
+    "start": "node build/server.js",
+    "build": "tsc --build && typeorm migration:run"
   },
   "repository": {
     "type": "git",

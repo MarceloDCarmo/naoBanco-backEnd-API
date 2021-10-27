@@ -56,3 +56,7 @@
 // }
 
 // export { CreditCardBillService }
+
+class CreditCardBillService{}
+
+export { CreditCardBillService }

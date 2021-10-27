@@ -2,3 +2,4 @@ node_modules/
 yarn-error.log
 src/database/database.sqlite
 *.vscode
+package-lock.json

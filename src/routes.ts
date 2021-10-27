@@ -17,6 +17,11 @@ const depostiController = new DepositController()
 const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
 
+//Start
+router.get("/", (req, res) => {
+    return res.status(200).send("<h1>Wellcome to NãoBanco!</h1>")
+})
+
 //User
 router.post("/user", (userController.CreateNewUser));
 router.delete("/user", (userController.DeleteAlltoUser));

@@ -3,14 +3,24 @@ import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import { router } from "./routes";
 import "./database"; //From: index.ts (database)
+import swaggerUi from "swagger-ui-express"
 
 const port = 3000
 const app = express()
 
+app.use("/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(undefined, {
+        swaggerOptions: {
+            url: "/swagger.json",
+        },
+    })
+)
+
 app.use(express.json());
 app.use(router);
-app.use((err: Error, request : Request, response : Response, next: NextFunction) => {
-    if(err instanceof Error){
+app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
+    if (err instanceof Error) {
         return response.status(400).json({
             error: err.message
         })

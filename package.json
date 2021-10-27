@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "dev": "concurrently \"ts-node-dev src/server.ts\" \"tsoa spec\"",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "start": "node build/index.js",
+    "predev": "npm run swagger",
+    "prebuild": "npm run swagger",
+    "build": "tsc",
+    "swagger": "tsoa spec"
   },
   "repository": {
     "type": "git",
@@ -22,8 +27,10 @@
     "@types/bcrypt": "^5.0.0",
     "@types/email-validator": "^1.0.6",
     "@types/jsonwebtoken": "^8.5.5",
+    "@types/swagger-ui-express": "^4.1.3",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.3.0",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",

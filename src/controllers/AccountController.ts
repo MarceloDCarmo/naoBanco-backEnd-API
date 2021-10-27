@@ -5,7 +5,7 @@ const accountService = new AccountService()
 
 class AccountController {
 
-    async create(req: Request, res: Response){
+    async create(req: Request, res: Response): Promise<Response>{
         const { nick, password, user } = req.body
         
         const account = await accountService.create({nick, password, user})

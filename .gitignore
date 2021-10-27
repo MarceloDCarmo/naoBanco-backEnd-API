@@ -4,3 +4,4 @@ src/database/database.sqlite
 *.vscode
 package-lock.json
 dist/
+*.env

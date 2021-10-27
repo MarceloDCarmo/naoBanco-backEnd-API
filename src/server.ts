@@ -1,10 +1,13 @@
+import dotenv from "dotenv"
 import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import { router } from "./routes";
 import "./database"; //From: index.ts (database)
 
-const port = 8080
+dotenv.config()
+
+const port = process.env.PORT
 const app = express()
 
 app.use(express.json());

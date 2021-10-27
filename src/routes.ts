@@ -31,6 +31,7 @@ router.post("/login", (authenticateUserService.handle));
 
 //Account
 router.get("/accounts/:accountNumber", accountController.getAccount)
+router.get("/accounts/:id", accountController.getAccountsByUser)
 router.post("/accounts", accountController.create)
 router.delete("/accounts/:accountNumber", accountController.delete)
 router.get("/accounts/:accountNumber/balance", accountController.getBalance)

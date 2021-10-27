@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import { AccountRepository } from "../repositories/AccountRepository";
 import { UsersRepositories } from "../repositories/UsersRepositories";
 import { hash, compare } from "bcrypt"
+import { verifyAccount } from "../helpers/VerifyAccount";
 
 interface IAccount {
     nick: string,
@@ -108,6 +109,21 @@ class AccountService {
         account.setNick(newNick)
 
         return await accountRepository.save(account)
+    }
+
+    async getAccountsByUser(id){
+
+        const usersRepository = getCustomRepository(UsersRepositories)
+        const userExists = await usersRepository.findOne(id)
+
+        if(!userExists){
+            throw new Error ("User doesn't exists")
+        }
+
+        const accountRepository = getCustomRepository(AccountRepository)
+        const accounts = accountRepository.findByUser(id)
+
+        return accounts
     }
 }
 

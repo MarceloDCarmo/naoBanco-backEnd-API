@@ -2,229 +2,633 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "NãoBanco",
+    "description": "API to serve NãoBanco React Native app. This is a graduation project for Analysis and Systems Development course at Fatec Carapicuíba"
   },
-  "host": "localhost:3000",
+  "host": "naobanco-dev.herokuapp.com",
   "basePath": "/",
-  "tags": [],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Authentications operations"
+    },
+    {
+      "name": "Users",
+      "description": "Operations related with User entity"
+    },
+    {
+      "name": "Accounts",
+      "description": "Operations related with Account entity"
+    },
+    {
+      "name": "Pix",
+      "description": "PIX operations"
+    },
+    {
+      "name": "Transactions",
+      "description": "All operations that generate Transactions"
+    },
+    {
+      "name": "CC",
+      "description": "Credit Card operations"
+    },
+    {
+      "name": "Test",
+      "description": "Test endpoints"
+    },
+    {
+      "name": "Utils",
+      "description": "Various utilities"
+    }
+  ],
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [],
   "produces": [],
   "paths": {
     "/": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Test"
+        ],
+        "description": "Test operation to start the API",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": ""
           }
         }
       }
     },
     "/user": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Users"
+        ],
+        "description": "Create user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "admin": {
+                  "type": "boolean"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       },
       "delete": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/user/settings": {
       "patch": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Users"
+        ],
+        "description": "Update the user's atribute with the value passed",
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "schema": {
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "atribute": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }],
         "responses": {}
       }
     },
     "/user/{email}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user by email",
+        "parameters": [{
+          "in": "path",
+          "name": "email",
+          "description": "User's email"
+        }],
         "responses": {}
       }
     },
     "/login": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Log in the API",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {}
+        }
       }
     },
     "/accounts/{accountNumber}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountNumber",
+            "description": "Account number"
+          }
+        ],
         "responses": {}
       },
       "delete": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete account",
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "schema": {
+            "properties": {
+              "accountNumber": {
+                "type": "string"
+              }
+            }
+          }
+        }],
         "responses": {}
       }
     },
     "/accounts/user/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get all user's account",
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "description":"User's id to get accounts"
+        }],
         "responses": {}
       }
     },
     "/accounts": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create account",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "nick": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/accounts/{accountNumber}/balance": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get account's balance",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountNumber",
+            "description":"Account to get balance"
+          }
+        ],
         "responses": {}
       }
     },
     "/accounts/changePass": {
       "patch": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Change account's password",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                },
+                "actualPassword": {
+                  "type": "string"
+                },
+                "newPassword": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/accounts/changeNick": {
       "patch": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Change account's nickname",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                },
+                "nick": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/generateBoleto": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Utils"
+        ],
+        "description": "Generate a boleto number for future deposit. Due Date format example: \"Oct 29, 2021\"",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "issuerAccount": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "duwDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/depositTest": {
       "put": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Endpoint to deposit on account for tests",
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "schema": {
+            "properties": {
+              "accountNumber": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }],
         "responses": {}
       }
     },
     "/deposit": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Deposit via boleto",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "boletoNumbwe": {
+                  "type": "string"
+                },
+                "payingAccount": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/transactions/{transactionId}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Get transaction by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "description":"Transaction id"
+          }
+        ],
         "responses": {}
       }
     },
     "/transactions/{accountNumber}/{date}": {
       "get": {
-        "tags": [],
+        "tags": [
+          "Transactions"
+        ],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountNumber",
+            "description":"Account to get transaction"
+          },
+          {
+            "in": "path",
+            "name": "date",
+            "description":"Format yyyy-MM-dd"
+          }
+        ],
         "responses": {}
       }
     },
     "/transactions/{accountNumber}/{startDate}/{endDate}": {
       "get": {
-        "tags": [],
+        "tags": [
+          "Transactions"
+        ],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountNumber",
+            "description": "Account number to get transactions"
+          },
+          {
+            "in": "path",
+            "name": "startDate",
+            "description": "Format yyyy-MM-dd"
+          },
+          {
+            "in": "path",
+            "name": "endDate",
+            "description": "Format yyyy-MM-dd"
+          }
+        ],
         "responses": {}
       }
     },
     "/transfers/ted": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Transfer via TED",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "sender": {
+                  "type": "string"
+                },
+                "receiver": {
+                  "type": "number"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/transfers/pix": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Transfer via PIX",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "sender": {
+                  "type": "string"
+                },
+                "receiver": {
+                  "type": "number"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/pixKeys/account/{accountNumber}": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Pix"
+        ],
+        "description": "Get all keys registered in the account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountNumber",
+            "description": "Account number to get keys"
+          }
+        ],
         "responses": {}
       }
     },
     "/pixKeys/{pixKey}/info": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Pix"
+        ],
+        "description": "Get account info based on PIX key",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pixKey",
+            "description": "Account's PIX key"
+          }
+        ],
         "responses": {}
       }
     },
     "/pixKeys/random": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Pix"
+        ],
+        "description": "Generate random PIX key",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber":"string"
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/pixKeys/email": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Pix"
+        ],
+        "description": "Generate email PIX key",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/pixKeys": {
       "delete": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Pix"
+        ],
+        "description": "Delete PIX key",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "pixKey": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       }
     },
     "/cc/{accountNumber}": {
       "get": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -232,7 +636,9 @@
     },
     "/cc/bill/{accountNumber}": {
       "get": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -240,13 +646,17 @@
     },
     "/cc": {
       "post": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
       },
       "delete": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -254,7 +664,9 @@
     },
     "/cc/userlimit": {
       "patch": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -262,7 +674,9 @@
     },
     "/cc/maxlimit": {
       "patch": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -270,7 +684,9 @@
     },
     "/cc/block": {
       "patch": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
@@ -278,7 +694,9 @@
     },
     "/cc/payday": {
       "patch": {
-        "tags": [],
+        "tags": [
+          "CC"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}

@@ -43,7 +43,7 @@ class AccountController {
         const account = await accountService.changePassword(accountNumber, actualPassword, newPassword)
 
         return res.status(200).json({
-            accountNumber: account.account_number,
+            accountNumber: account.accountNumber,
             message: "Password changed"
         })
     }
@@ -54,7 +54,7 @@ class AccountController {
         const account = await accountService.changeNick(accountNumber, nick)
 
         return res.status(200).json({
-            accountNumber: account.account_number,
+            accountNumber: account.accountNumber,
             message: "Nick changed"
         })
     }

@@ -3,11 +3,19 @@ import { AccountRepository } from "../repositories/AccountRepository";
 import { UsersRepositories } from "../repositories/UsersRepositories";
 import { hash, compare } from "bcrypt"
 import { verifyAccount } from "../helpers/VerifyAccount";
+import { Account } from "../entities/Account";
 
 interface IAccount {
     nick: string,
     password: string,
     user: string
+}
+
+interface AccountDTO {
+    accountNumber: number
+    nick: string,
+    user: string,
+    balance: number
 }
 
 class AccountService {
@@ -94,7 +102,7 @@ class AccountService {
 
         account.setPassword(hashedPassword)
 
-        return await accountRepository.save(account)
+        return this.toAccountDTO(await accountRepository.save(account))
     }
 
     async changeNick(accountNumber: number, newNick: string) {
@@ -108,10 +116,10 @@ class AccountService {
 
         account.setNick(newNick)
 
-        return await accountRepository.save(account)
+        return this.toAccountDTO(await accountRepository.save(account))
     }
 
-    async getAccountsByUser(id){
+    async getAccountsByUser(id: string){
 
         const usersRepository = getCustomRepository(UsersRepositories)
         const userExists = await usersRepository.findOne(id)
@@ -121,9 +129,26 @@ class AccountService {
         }
 
         const accountRepository = getCustomRepository(AccountRepository)
-        const accounts = accountRepository.findByUser(id)
+        const accounts = await accountRepository.findByUser(id)
 
-        return accounts
+        let accountsDTO: AccountDTO[] = []
+
+        accounts.forEach((account) => {
+            accountsDTO.push(this.toAccountDTO(account))
+        })
+
+        return accountsDTO
+    }
+
+    toAccountDTO(account: Account) {
+        let accDTO: AccountDTO = {
+            accountNumber: account.account_number,
+            nick: account.nick,
+            user: account.user,
+            balance: account.balance
+        }
+
+        return accDTO
     }
 }
 

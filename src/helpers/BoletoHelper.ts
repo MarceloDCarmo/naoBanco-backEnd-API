@@ -1,9 +1,15 @@
 class BoletoHelper {
 
     generate(issuerAccount:number, value:number, dueDate:Date):string{
+
+        if(dueDate.getTime() <= Date.now()){
+            throw new Error ("Due date must be greater than " + new Date(Date.now()))
+        }
+
         let boletoNumber:string
         
-        boletoNumber = 'BOL923571113171923293137'
+        boletoNumber = 'BOL92357111'
+        boletoNumber = boletoNumber.concat(Date.now().toString())
         boletoNumber = boletoNumber.concat(issuerAccount.toString().padStart(5, '0'))
         boletoNumber = boletoNumber.concat('7')
 

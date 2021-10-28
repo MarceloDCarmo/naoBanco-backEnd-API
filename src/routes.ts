@@ -13,7 +13,7 @@ const userController = new UserController();
 const authenticateUserService = new AuthenticateUserController();
 const CreditCardService = new CreditCardController()
 const accountController = new AccountController()
-const depostiController = new DepositController()
+const depostitController = new DepositController()
 const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
 
@@ -39,10 +39,10 @@ router.patch("/accounts/changePass", accountController.changePassword)
 router.patch("/accounts/changeNick", accountController.changeNick)
 
 //Boleto
-router.post("/generateBoleto", depostiController.generateDepositBoleto)
+router.post("/generateBoleto", depostitController.generateDepositBoleto)
 
 //Transactions
-router.put("/depositTest", depostiController.deposit) //Endpoint to desposit values in accounts for tests
+router.put("/depositTest", depostitController.deposit) //Endpoint to desposit values in accounts for tests
 router.post("/deposit", transactionController.executeBoletoDeposit)  //deposit with boleto
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 router.get("/transactions/:accountNumber/:date", transactionController.getTransactionsByDate)

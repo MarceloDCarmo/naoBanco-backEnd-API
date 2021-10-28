@@ -5,3 +5,4 @@ src/database/database.sqlite
 package-lock.json
 dist/
 *.env
+yarn-error.log

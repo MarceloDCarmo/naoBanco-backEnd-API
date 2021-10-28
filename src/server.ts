@@ -5,12 +5,17 @@ import "express-async-errors";
 import { router } from "./routes";
 import "./database"; //From: index.ts (database)
 
+import swaggerUi from "swagger-ui-express"
+import swaggerFile from "../swagger_output.json"
+
 dotenv.config()
 
 const port = process.env.PORT
 const app = express()
 
-app.use(express.json());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
+app.use(express.json())
 app.use(router);
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof Error) {

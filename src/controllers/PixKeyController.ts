@@ -39,6 +39,14 @@ class PixKeyCotroller{
 
         return res.status(200).json(keys)
     }
+
+    async getKeyAccountInfo(req: Request, res: Response){
+        const { pixKey } = req.params
+
+        const account = await pixService.getKeyAccountInfo(pixKey)
+
+        return res.status(200).json(account)
+    }
 }
 
 export { PixKeyCotroller }

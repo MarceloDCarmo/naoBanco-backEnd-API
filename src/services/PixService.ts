@@ -2,7 +2,7 @@ import { getCustomRepository } from "typeorm"
 import { PixRepository } from "../repositories/PixRepository"
 import { verifyAccount } from "../helpers/VerifyAccount"
 import { validate as emailIsValid } from "email-validator" 
-import { verify } from "jsonwebtoken"
+import { AccountRepository } from "../repositories/AccountRepository"
 
 enum PixRandomNumbers {
     //RGF codes referent to the main color of some Banks
@@ -97,6 +97,23 @@ class PixService{
         const keys = pixRepository.findKeysByAccount(accoutnNumber)
 
         return keys
+    }
+
+    async getKeyAccountInfo(pixKey: string){
+
+        const pixRepository = getCustomRepository(PixRepository)
+        const key = await pixRepository.findOne(pixKey)
+
+        if(!key){
+            throw new Error ("Pix Key doesn't exist")
+        }
+        
+        const accountNumber = key.account
+        const accountRepository = getCustomRepository(AccountRepository)
+
+        const account = accountRepository.findOne(accountNumber)
+
+        return account
     }
 }
 

@@ -31,7 +31,7 @@ router.post("/login", (authenticateUserService.handle));
 
 //Account
 router.get("/accounts/:accountNumber", accountController.getAccount)
-router.get("/accounts/:id", accountController.getAccountsByUser)
+router.get("/accounts/user/:id", accountController.getAccountsByUser)
 router.post("/accounts", accountController.create)
 router.delete("/accounts/:accountNumber", accountController.delete)
 router.get("/accounts/:accountNumber/balance", accountController.getBalance)
@@ -52,7 +52,8 @@ router.post("/transfers/ted", transactionController.executeTedTranfer)
 router.post("/transfers/pix", transactionController.executePixTransfer)
 
 //Pix
-router.get("/pixKeys/:accountNumber", pixKeyController.getKeysByAccount)
+router.get("/pixKeys/account/:accountNumber", pixKeyController.getKeysByAccount)
+router.get("/pixKeys/:pixKey/info", pixKeyController.getKeyAccountInfo)
 router.post("/pixKeys/random", pixKeyController.createRandomKey)
 router.post("/pixKeys/email", pixKeyController.createEmailKey)
 router.delete("/pixKeys", pixKeyController.deleteKey)

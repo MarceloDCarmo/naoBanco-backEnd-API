@@ -484,7 +484,7 @@
                 "value": {
                   "type": "string"
                 },
-                "type": {
+                "message": {
                   "type": "string"
                 }
               }
@@ -515,7 +515,7 @@
                 "value": {
                   "type": "string"
                 },
-                "type": {
+                "message": {
                   "type": "string"
                 }
               }

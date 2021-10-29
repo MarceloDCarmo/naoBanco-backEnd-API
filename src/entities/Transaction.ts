@@ -22,6 +22,9 @@ export class Transaction {
     @CreateDateColumn()
     created_at: Date
 
+    @Column()
+    message: string
+
     constructor() {
         if(!this.id){
             this.id = uuid()

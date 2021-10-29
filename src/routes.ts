@@ -47,7 +47,6 @@ router.post("/deposit", transactionController.executeBoletoDeposit)  //deposit w
 router.get("/transactions/:transactionId", transactionController.getTransaction)
 router.get("/transactions/:accountNumber/:date", transactionController.getTransactionsByDate)
 router.get("/transactions/:accountNumber/:startDate/:endDate", transactionController.getTransactionsByRangeDate)
-//router.get("/transactions/rangedate ("with limit, Max 90 days")
 router.post("/transfers/ted", transactionController.executeTedTranfer)
 router.post("/transfers/pix", transactionController.executePixTransfer)
 

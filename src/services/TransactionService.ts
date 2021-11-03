@@ -1,4 +1,6 @@
 import { getCustomRepository } from "typeorm"
+import { PixHelper } from "../helpers/PixHelper"
+import { verifyAccount } from "../helpers/VerifyAccount"
 import { AccountRepository } from "../repositories/AccountRepository"
 import { PixRepository } from "../repositories/PixRepository"
 import { TransactionRepository } from "../repositories/TransactionRepository"
@@ -145,6 +147,24 @@ class TransactionService {
                 type: "boleto",
                 message: ""
             })
+
+    }
+
+    async pixCopyAndPaste(sender: number, code:string){
+
+        verifyAccount(sender)
+
+        const transferData = PixHelper.decodeCopyAndPaste(code)
+
+        verifyAccount(transferData.receiverAccount)
+
+        return await this.executeTransfer({
+            sender,
+            receiver: transferData.receiverAccount,
+            value: transferData.value,
+            type: "PIX",
+            message: ""            
+        })
 
     }
 

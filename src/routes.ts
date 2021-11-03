@@ -49,6 +49,7 @@ router.get("/transactions/:accountNumber/:date", transactionController.getTransa
 router.get("/transactions/:accountNumber/:startDate/:endDate", transactionController.getTransactionsByRangeDate)
 router.post("/transfers/ted", transactionController.executeTedTranfer)
 router.post("/transfers/pix", transactionController.executePixTransfer)
+router.post("/pix/copy-paste/pay", transactionController.executeCopyAndPastePixTransfer)
 
 //Pix
 router.get("/pixKeys/account/:accountNumber", pixKeyController.getKeysByAccount)

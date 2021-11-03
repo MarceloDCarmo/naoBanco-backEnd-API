@@ -25,11 +25,7 @@ class PixService{
         
         await verifyAccount(accountNumber)
         
-        let stringAccount = accountNumber.toString()
-
-        while(stringAccount.length < 6) {
-            stringAccount = "0" + stringAccount
-        }
+        let stringAccount = accountNumber.toString().padStart(6, '0')
 
         let pixString = "PX"
 
@@ -129,16 +125,23 @@ class PixService{
             throw new Error ("Account doesn't have registered any pix key")
         }
 
-        let stringAccount = receiverAccount.toString()
+        const randomKeys = keys.filter(key => {
+            return key.type == "random"
+        })
 
-        while(stringAccount.length < 6) {
-            stringAccount = "0" + stringAccount
-        }
+        let stringAccount = ""
+        let pixString = ""
 
-        let pixString = "PX"
-
-        for (let i = 0; i < stringAccount.length; i++) {
-            pixString += PixRandomNumbers[parseInt(stringAccount.charAt(i))]
+        if(!randomKeys.length){
+            stringAccount = receiverAccount.toString().padStart(6, '0')
+    
+            pixString = "PX"
+    
+            for (let i = 0; i < stringAccount.length; i++) {
+                pixString += PixRandomNumbers[parseInt(stringAccount.charAt(i))]
+            }
+        } else {
+            pixString = randomKeys[0].key
         }
 
         return PixHelper.generateCopyAndPaste(pixString, value, receiverAccount)

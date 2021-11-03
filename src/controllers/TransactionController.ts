@@ -51,7 +51,6 @@ class TransactionController {
         return res.status(200).json(new TransactionDTO(transaction))
     }
 
-
     async executeBoletoDeposit(req: Request, res: Response) {
         const { boletoNumber, payingAccount } = req.body
         const transactionService = new TransactionService()
@@ -87,6 +86,15 @@ class TransactionController {
         })
 
         return res.status(200).json(transactionsDTO)
+    }
+
+    async executeCopyAndPastePixTransfer(req: Request, res: Response){
+        const { sender, copyAndPasteCode } = req.body
+
+        const transactionService = new TransactionService()
+        const transaction = await transactionService.pixCopyAndPaste(parseInt(sender), copyAndPasteCode)
+
+        return res.status(200).json(transaction)
     }
 }
 

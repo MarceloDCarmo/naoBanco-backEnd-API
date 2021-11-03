@@ -637,6 +637,31 @@
         "responses": {}
       }
     },
+    "/pix/copy-paste/pay": {
+      "post": {
+        "tags": [
+          "Pix"
+        ],
+        "description": "Execute PIX transfer via \"copy and paste\" code",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "sender": {
+                  "type": "number"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/pixKeys": {
       "delete": {
         "tags": [

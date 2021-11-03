@@ -118,23 +118,25 @@
           "Users"
         ],
         "description": "Update the user's atribute with the value passed",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "properties": {
-              "email": {
-                "type": "string"
-              },
-              "atribute": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "atribute": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
               }
             }
           }
-        }],
+        ],
         "responses": {}
       }
     },
@@ -144,11 +146,13 @@
           "Users"
         ],
         "description": "Get user by email",
-        "parameters": [{
-          "in": "path",
-          "name": "email",
-          "description": "User's email"
-        }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "description": "User's email"
+          }
+        ],
         "responses": {}
       }
     },
@@ -199,17 +203,19 @@
           "Accounts"
         ],
         "description": "Delete account",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "properties": {
-              "accountNumber": {
-                "type": "string"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                }
               }
             }
           }
-        }],
+        ],
         "responses": {}
       }
     },
@@ -219,11 +225,13 @@
           "Accounts"
         ],
         "description": "Get all user's account",
-        "parameters": [{
-          "in": "path",
-          "name": "id",
-          "description":"User's id to get accounts"
-        }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User's id to get accounts"
+          }
+        ],
         "responses": {}
       }
     },
@@ -265,7 +273,7 @@
           {
             "in": "path",
             "name": "accountNumber",
-            "description":"Account to get balance"
+            "description": "Account to get balance"
           }
         ],
         "responses": {}
@@ -358,20 +366,22 @@
           "Transactions"
         ],
         "description": "Endpoint to deposit on account for tests",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "properties": {
-              "accountNumber": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
               }
             }
           }
-        }],
+        ],
         "responses": {}
       }
     },
@@ -410,7 +420,7 @@
           {
             "in": "path",
             "name": "transactionId",
-            "description":"Transaction id"
+            "description": "Transaction id"
           }
         ],
         "responses": {}
@@ -426,12 +436,12 @@
           {
             "in": "path",
             "name": "accountNumber",
-            "description":"Account to get transaction"
+            "description": "Account to get transaction"
           },
           {
             "in": "path",
             "name": "date",
-            "description":"Format yyyy-MM-dd"
+            "description": "Format yyyy-MM-dd"
           }
         ],
         "responses": {}
@@ -569,7 +579,7 @@
             "name": "body",
             "schema": {
               "properties": {
-                "accountNumber":"string"
+                "accountNumber": "string"
               }
             }
           }
@@ -593,6 +603,31 @@
                   "type": "string"
                 },
                 "email": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/pix/copy-paste/generate": {
+      "post": {
+        "tags": [
+          "Pix"
+        ],
+        "description": "Generate a \"copy and paste\" code to pay via PIX",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "receiverAccount": {
+                  "type": "number"
+                },
+                "value": {
                   "type": "number"
                 }
               }

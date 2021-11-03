@@ -56,6 +56,7 @@ router.get("/pixKeys/:pixKey/info", pixKeyController.getKeyAccountInfo)
 router.post("/pixKeys/random", pixKeyController.createRandomKey)
 router.post("/pixKeys/email", pixKeyController.createEmailKey)
 router.delete("/pixKeys", pixKeyController.deleteKey)
+router.post("/pix/copy-paste/generate", pixKeyController.generateCopyAndPaste)
 
 //VirtualCR
 router.get("/cc/:accountNumber", CreditCardService.GetCreditCard)

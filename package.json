@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "yarn build && yarn start",
     "dev": "ts-node-dev src/server.ts",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "build": "tsc && typeorm migration:run",

@@ -3,6 +3,7 @@ import { PixRepository } from "../repositories/PixRepository"
 import { verifyAccount } from "../helpers/VerifyAccount"
 import { validate as emailIsValid } from "email-validator" 
 import { AccountRepository } from "../repositories/AccountRepository"
+import { PixHelper } from "../helpers/PixHelper"
 
 enum PixRandomNumbers {
     //RGF codes referent to the main color of some Banks
@@ -114,6 +115,33 @@ class PixService{
         const account = accountRepository.findOne(accountNumber)
 
         return account
+    }
+
+    async generateCopyAndPaste(receiverAccount:number, value:number){
+
+        verifyAccount(receiverAccount)
+
+        const pixRepository = getCustomRepository(PixRepository)
+
+        const keys = await pixRepository.findKeysByAccount(receiverAccount)
+
+        if(!keys) {
+            throw new Error ("Account doesn't have registered any pix key")
+        }
+
+        let stringAccount = receiverAccount.toString()
+
+        while(stringAccount.length < 6) {
+            stringAccount = "0" + stringAccount
+        }
+
+        let pixString = "PX"
+
+        for (let i = 0; i < stringAccount.length; i++) {
+            pixString += PixRandomNumbers[parseInt(stringAccount.charAt(i))]
+        }
+
+        return PixHelper.generateCopyAndPaste(pixString, value, receiverAccount)
     }
 }
 

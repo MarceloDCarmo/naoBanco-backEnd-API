@@ -35,9 +35,6 @@ abstract class Populate {
             let accountPrimary:Account
             let accountSecondary:Account
 
-            console.log(JSON.stringify(accountOneExists));
-            console.log(JSON.stringify(accountTwoExists));
-
             if (!accountOneExists) {
                 accountPrimary = await accountService.create({
                     nick: "primária",

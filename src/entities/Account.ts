@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne, PrimaryColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 // import { v4 as uuid } from "uuid";
 
@@ -18,7 +18,7 @@ export class Account {
     user: string
 
     @JoinColumn({ name: "user" })
-    @OneToOne(() => User)
+    @ManyToOne(() => User)
     _user: User
 
     @Column()

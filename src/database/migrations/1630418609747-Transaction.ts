@@ -8,16 +8,16 @@ export class Transaction1630418609747 implements MigrationInterface {
             columns: [
                 {
                     name: "id",
-                    type: "uuid",
+                    type: "varchar",
                     isPrimary: true,
                 },
                 {
                     name: "sender_account",
-                    type: "varchar"
+                    type: "integer"
                 },
                 {
                     name: "receiver_account",
-                    type: "varchar"
+                    type: "integer"
                 },
                 {
                     name: "type",
@@ -43,16 +43,16 @@ export class Transaction1630418609747 implements MigrationInterface {
                     referencedTableName: "bank_account",
                     referencedColumnNames: ["account_number"],
                     columnNames: ["sender_account"],
-                    onDelete: "SET NULL",
-                    onUpdate: "SET NULL"
+                    onDelete: "NO ACTION",
+                    onUpdate: "CASCADE"
                 },
                 {
                     name: "FK_RECEIVER_ACCOUNT",
                     referencedTableName: "bank_account",
                     referencedColumnNames: ["account_number"],
                     columnNames: ["receiver_account"],
-                    onDelete: "SET NULL",
-                    onUpdate: "SET NULL"
+                    onDelete: "NO ACTION",
+                    onUpdate: "CASCADE"
                 }
             ]
         }))

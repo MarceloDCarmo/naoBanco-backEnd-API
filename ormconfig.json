@@ -1,10 +1,19 @@
 {
-    "type": "sqlite",
-    "database": "src/database/database.sqlite",
-    "migrations": ["dist/src/database/migrations/*.js"],
-    "entities": ["dist/src/entities/*.js"],
-    "cli": {
-        "migrationsDir": "src/database/migrations",
-        "entitiesDir": "src/entities"
-    }
-}
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "nao_banco",
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+       "dist/src/entities/User.js",
+       "dist/src/entities/Account.js",
+       "dist/src/entities/Pix.js",
+       "dist/src/entities/Transaction.js"
+    ],
+    "migrations": [
+       "dist/src/database/migrations/*.js"
+    ]
+ }

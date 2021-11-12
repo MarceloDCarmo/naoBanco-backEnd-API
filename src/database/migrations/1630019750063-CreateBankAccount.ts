@@ -24,7 +24,7 @@ export class CreateBankAccount1630019750063 implements MigrationInterface {
                     },
                     {
                         name: "user",
-                        type: "uuid"
+                        type: "varchar"
                     },
                     {
                         name: "balance",
@@ -33,12 +33,9 @@ export class CreateBankAccount1630019750063 implements MigrationInterface {
                 ],
                 foreignKeys:[
                     {
-                        name: "FK_USER_ACCOUNT",
                         referencedTableName: "users",
                         referencedColumnNames: ["id"],
-                        columnNames: ["user"],
-                        onDelete: "SET NULL",
-                        onUpdate: "SET NULL"
+                        columnNames: ["user"]
                     }
                 ]
             }))

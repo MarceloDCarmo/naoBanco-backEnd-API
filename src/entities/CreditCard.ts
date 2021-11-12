@@ -1,6 +1,5 @@
-import {Column, CreateDateColumn, Entity, PrimaryColumn, JoinColumn, OneToOne,} from "typeorm";
-import { Account } from "./Account";
-import { parse, v4 as uuid } from "uuid"
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
 @Entity("credit_card")
 export class CreditCard {

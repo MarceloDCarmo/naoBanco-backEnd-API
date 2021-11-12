@@ -18,8 +18,8 @@ class TestController {
         const accounts = await accountService.getAccountsByUser(user.id)
 
         let pixKeys = []
-        pixKeys[0] = await pixService.getKeysByAccount(1)
-        pixKeys[1] = await pixService.getKeysByAccount(2)
+        pixKeys[0] = await pixService.getKeysByAccount(5)
+        pixKeys[1] = await pixService.getKeysByAccount(15)
 
         const info = {
             user,

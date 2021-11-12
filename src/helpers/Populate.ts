@@ -29,8 +29,8 @@ abstract class Populate {
             })
 
             const accountRepository = getCustomRepository(AccountRepository)
-            const accountOneExists = await accountRepository.findOne(1)
-            const accountTwoExists = await accountRepository.findOne(2)
+            const accountOneExists = await accountRepository.findOne(5)
+            const accountTwoExists = await accountRepository.findOne(15)
 
             let accountPrimary:Account
             let accountSecondary:Account
@@ -42,7 +42,7 @@ abstract class Populate {
                     user: user.id
                 })
 
-                await depositService.execute("1", 1000000)
+                await depositService.execute("5", 1000000)
 
                 await pixService.createRandomKey(accountPrimary.account_number)
 
@@ -57,7 +57,7 @@ abstract class Populate {
                     user: user.id
                 })
 
-                await depositService.execute("2", 1000000)
+                await depositService.execute("15", 1000000)
 
                 await pixService.createRandomKey(accountSecondary.account_number)
 

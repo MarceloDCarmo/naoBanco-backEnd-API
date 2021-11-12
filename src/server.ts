@@ -1,12 +1,11 @@
-import dotenv from "dotenv"
-import "reflect-metadata";
-import express, { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv";
+import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
-import { router } from "./routes";
+import "reflect-metadata";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "../swagger_output.json";
 import "./database"; //From: index.ts (database)
-
-import swaggerUi from "swagger-ui-express"
-import swaggerFile from "../swagger_output.json"
+import { router } from "./routes";
 
 dotenv.config()
 
@@ -28,4 +27,5 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         message: "Internal Server Error"
     })
 })
+
 app.listen(port, () => console.log(`Server running on port ${port}`));

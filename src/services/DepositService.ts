@@ -1,7 +1,5 @@
 import { getCustomRepository } from "typeorm"
 import { AccountRepository } from "../repositories/AccountRepository"
-import { TransactionService } from "./TransactionService"
-
 
 class DepositService {
 

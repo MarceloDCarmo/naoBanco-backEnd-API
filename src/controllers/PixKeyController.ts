@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ReportEmitErrorSummary } from "typescript";
 import { PixService } from "../services/PixService";
 
 const pixService = new PixService()
@@ -61,4 +60,5 @@ class PixKeyCotroller {
     }
 }
 
-export { PixKeyCotroller }
+export { PixKeyCotroller };
+

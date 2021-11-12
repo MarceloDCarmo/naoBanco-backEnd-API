@@ -6,6 +6,7 @@ import { UserController } from "./controllers/UserController";
 import { DepositController } from "./controllers/DepositController";
 import { PixKeyCotroller } from "./controllers/PixKeyController";
 import { TransactionController } from "./controllers/TransactionController";
+import { TestController } from "./controllers/TestController";
 
 const router = Router();
 
@@ -16,11 +17,15 @@ const accountController = new AccountController()
 const depostitController = new DepositController()
 const transactionController = new TransactionController()
 const pixKeyController = new PixKeyCotroller()
+const testeController = new TestController()
 
 //Start
 router.get("/", (req, res) => {
     return res.status(200).send("<h1>Wellcome to NãoBanco!</h1>")
 })
+
+//Test
+router.get("/test", testeController.getInfo)
 
 //User
 router.post("/user", (userController.CreateNewUser));

@@ -61,6 +61,20 @@
         }
       }
     },
+    "/test": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "description": "Populates the DB with test user, account and PIX keys in the case they don't exists. Return these test entities info",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/user": {
       "post": {
         "tags": [

@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm"
 import { PixRepository } from "../repositories/PixRepository"
 import { verifyAccount } from "../helpers/VerifyAccount"
-import { validate as emailIsValid } from "email-validator" 
+import { validate as emailIsValid } from "email-validator"
 import { AccountRepository } from "../repositories/AccountRepository"
 import { PixHelper } from "../helpers/PixHelper"
 
@@ -19,13 +19,17 @@ enum PixRandomNumbers {
     "D4AD68"  //Safra
 }
 
-class PixService{
-    async createRandomKey(accountNumber: number){
+class PixService {
+    async createRandomKey(accountNumber: number) {
         const pixRepository = getCustomRepository(PixRepository)
-        
+
         await verifyAccount(accountNumber)
-        
-        let stringAccount = accountNumber.toString().padStart(6, '0')
+
+        const timestamp = Date.now().toString()
+        let stringAccount = ""
+
+        stringAccount = stringAccount.concat(timestamp)
+        stringAccount = stringAccount.concat(accountNumber.toString().padStart(6, '0'))
 
         let pixString = "PX"
 
@@ -35,7 +39,7 @@ class PixService{
 
         const pixAlreadyExists = await pixRepository.findOne(pixString)
 
-        if(pixAlreadyExists){
+        if (pixAlreadyExists) {
             throw new Error("Account already has random pix key")
         }
 
@@ -48,9 +52,9 @@ class PixService{
         return await pixRepository.save(pixKey)
     }
 
-    async createEmailKey(accountNumber: number, email: string){
-        
-        if(!emailIsValid(email)){
+    async createEmailKey(accountNumber: number, email: string) {
+
+        if (!emailIsValid(email)) {
             throw new Error("Invalid email")
         }
 
@@ -60,7 +64,7 @@ class PixService{
 
         const emailKeyAlreadyExists = await pixRepository.findOne(email)
 
-        if(emailKeyAlreadyExists){
+        if (emailKeyAlreadyExists) {
             throw new Error("Email already used")
         }
 
@@ -69,16 +73,16 @@ class PixService{
             type: "email",
             account: accountNumber
         })
-        
+
         return await pixRepository.save(pixKey)
     }
 
-    async deleteKey(pixKey: string){
+    async deleteKey(pixKey: string) {
         const pixRepository = getCustomRepository(PixRepository)
-        
+
         const pixExists = await pixRepository.findOne(pixKey)
-        
-        if(!pixExists){
+
+        if (!pixExists) {
             throw new Error("Pix key doesn't exists")
         }
 
@@ -86,7 +90,7 @@ class PixService{
     }
 
     async getKeysByAccount(accoutnNumber: number) {
-        
+
         verifyAccount(accoutnNumber)
 
         const pixRepository = getCustomRepository(PixRepository)
@@ -96,15 +100,15 @@ class PixService{
         return keys
     }
 
-    async getKeyAccountInfo(pixKey: string){
+    async getKeyAccountInfo(pixKey: string) {
 
         const pixRepository = getCustomRepository(PixRepository)
         const key = await pixRepository.findOne(pixKey)
 
-        if(!key){
-            throw new Error ("Pix Key doesn't exist")
+        if (!key) {
+            throw new Error("Pix Key doesn't exist")
         }
-        
+
         const accountNumber = key.account
         const accountRepository = getCustomRepository(AccountRepository)
 
@@ -113,7 +117,7 @@ class PixService{
         return account
     }
 
-    async generateCopyAndPaste(receiverAccount:number, value:number){
+    async generateCopyAndPaste(receiverAccount: number, value: number) {
 
         verifyAccount(receiverAccount)
 
@@ -121,8 +125,8 @@ class PixService{
 
         const keys = await pixRepository.findKeysByAccount(receiverAccount)
 
-        if(!keys) {
-            throw new Error ("Account doesn't have registered any pix key")
+        if (!keys) {
+            throw new Error("Account doesn't have registered any pix key")
         }
 
         const randomKeys = keys.filter(key => {
@@ -132,11 +136,14 @@ class PixService{
         let stringAccount = ""
         let pixString = ""
 
-        if(!randomKeys.length){
-            stringAccount = receiverAccount.toString().padStart(6, '0')
-    
+        if (!randomKeys.length) {
+            const timestamp = Date.now().toString()
+
+            stringAccount = stringAccount.concat(timestamp)
+            stringAccount = stringAccount.concat(receiverAccount.toString().padStart(6, '0'))
+
             pixString = "PX"
-    
+
             for (let i = 0; i < stringAccount.length; i++) {
                 pixString += PixRandomNumbers[parseInt(stringAccount.charAt(i))]
             }

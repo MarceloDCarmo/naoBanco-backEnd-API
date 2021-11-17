@@ -19,6 +19,7 @@ class AuthenticateUserService{
         const user = await usersRepositories.findOne({
             email
         });
+
         if(!user){
             throw new Error("Email or Password incorrect")
         }
@@ -37,7 +38,12 @@ class AuthenticateUserService{
             expiresIn: "1d"}
         )
 
-        return token;
+        const authenticatedUser = {
+            user,
+            token
+        }
+
+        return authenticatedUser;
     }
 
     

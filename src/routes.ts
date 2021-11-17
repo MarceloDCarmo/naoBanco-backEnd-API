@@ -32,7 +32,7 @@ router.post("/user", (userController.CreateNewUser));
 router.delete("/user", (userController.DeleteAlltoUser));
 router.patch("/user/settings", (userController.updateUser));
 router.get("/user/:email", (userController.getUser));
-router.post("/login", (authenticateUserService.handle));
+router.post("/login", (authenticateUserService.login));
 
 //Account
 router.get("/accounts/:accountNumber", accountController.getAccount)

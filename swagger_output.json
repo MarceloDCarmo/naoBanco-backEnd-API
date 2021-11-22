@@ -197,6 +197,31 @@
         }
       }
     },
+    "/accounts/authenticate": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Athenticate account",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "accountNumber": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/accounts/{accountNumber}": {
       "get": {
         "tags": [

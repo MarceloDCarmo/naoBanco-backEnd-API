@@ -1,9 +1,8 @@
+import { compare, hash } from "bcrypt";
 import { getCustomRepository } from "typeorm";
+import { Account } from "../entities/Account";
 import { AccountRepository } from "../repositories/AccountRepository";
 import { UsersRepositories } from "../repositories/UsersRepositories";
-import { hash, compare } from "bcrypt"
-import { verifyAccount } from "../helpers/VerifyAccount";
-import { Account } from "../entities/Account";
 
 interface IAccount {
     nick: string,
@@ -152,4 +151,4 @@ class AccountService {
     }
 }
 
-export { AccountService }
+export { AccountService };

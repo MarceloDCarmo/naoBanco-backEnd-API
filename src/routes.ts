@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
+import { AuthenticationController } from "./controllers/AuthenticationController";
 import { CreditCardController } from "./controllers/CreditCardController";
 import { AccountController } from "./controllers/AccountController";
 import { UserController } from "./controllers/UserController";
@@ -11,7 +11,7 @@ import { TestController } from "./controllers/TestController";
 const router = Router();
 
 const userController = new UserController();
-const authenticateUserService = new AuthenticateUserController();
+const authenticationService = new AuthenticationController();
 const CreditCardService = new CreditCardController()
 const accountController = new AccountController()
 const depostitController = new DepositController()
@@ -32,9 +32,10 @@ router.post("/user", (userController.CreateNewUser));
 router.delete("/user", (userController.DeleteAlltoUser));
 router.patch("/user/settings", (userController.updateUser));
 router.get("/user/:email", (userController.getUser));
-router.post("/login", (authenticateUserService.login));
+router.post("/login", (authenticationService.login));
 
 //Account
+router.post("/accounts/authenticate", authenticationService.authenticateAccount)
 router.get("/accounts/:accountNumber", accountController.getAccount)
 router.get("/accounts/user/:id", accountController.getAccountsByUser)
 router.post("/accounts", accountController.create)

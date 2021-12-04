@@ -4,6 +4,7 @@ import { verifyAccount } from "../helpers/VerifyAccount"
 import { validate as emailIsValid } from "email-validator"
 import { AccountRepository } from "../repositories/AccountRepository"
 import { PixHelper } from "../helpers/PixHelper"
+import { UsersRepositories } from "../repositories/UsersRepositories"
 
 enum PixRandomNumbers {
     //RGF codes referent to the main color of some Banks
@@ -112,9 +113,15 @@ class PixService {
         const accountNumber = key.account
         const accountRepository = getCustomRepository(AccountRepository)
 
-        const account = accountRepository.findOne(accountNumber)
+        const account = await accountRepository.findOne(accountNumber)
 
-        return account
+        const userRepository = getCustomRepository(UsersRepositories)
+        const user = await userRepository.findOne(account.user)
+
+        return {
+            user,
+            account
+        }
     }
 
     async generateCopyAndPaste(receiverAccount: number, value: number) {

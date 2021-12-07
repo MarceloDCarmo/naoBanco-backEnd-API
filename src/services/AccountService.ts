@@ -31,11 +31,15 @@ class AccountService {
         const usersRepository = getCustomRepository(UsersRepositories)
         const accountRepository = getCustomRepository(AccountRepository)
 
+        if(!nick || !password || !user) {
+            throw new Error("You must provide an user, nickname and a password to create an account")
+        }
         const userExists = await usersRepository.findOne(user)
 
         if (!userExists) {
             throw new Error("User doesn't exists")
         }
+
 
         const hashedPassword = await hash(password, 8)
 

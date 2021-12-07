@@ -17,9 +17,9 @@ class UserService {
 
     async createUser({name, email, admin, password} : IUserRequest) {
         const usersRepository = getCustomRepository(UsersRepositories);
-        
-        if(!email){
-            throw new Error("Email Incorrect");
+
+        if(!email || !name || !password || !admin) {
+            throw new Error("You must provide an email, name, password and admin privilege to create an user account")
         }
 
         const userAlreadyExists = await usersRepository.findOne({

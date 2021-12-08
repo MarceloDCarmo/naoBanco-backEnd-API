@@ -29,7 +29,7 @@ class TransactionController {
         const transaction = await transactionService.prepareTedTransfer({
             sender,
             receiver,
-            value,
+            value: parseInt(value),
             type,
             message
         })
@@ -44,7 +44,7 @@ class TransactionController {
         const transaction = await transactionService.preparePixTransfer({
             sender,
             pixKey,
-            value,
+            value: parseInt(value),
             message
         })
 

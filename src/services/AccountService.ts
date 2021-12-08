@@ -40,6 +40,17 @@ class AccountService {
             throw new Error("User doesn't exists")
         }
 
+        const userAccounts= await accountRepository.findByUser(user)
+
+        const filteredAccounts = userAccounts.filter((account) => {
+            return account.nick == nick
+        })
+
+        console.log(JSON.stringify(filteredAccounts))
+
+        if(filteredAccounts.length > 0) {
+            throw new Error("You already have an account with the nick " + nick)
+        }
 
         const hashedPassword = await hash(password, 8)
 

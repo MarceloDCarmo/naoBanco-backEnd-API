@@ -82,41 +82,8 @@ class UserService {
                     }else
                     {
                         console.log(`User: ${user.email} - Not found Pix Keys to delete`);
-                    }//Pix Check and Delete.
-
-                    // //Transactions Check and Delete.
-                    // console.log(`User: ${user.email} - Check Transactions to delete`);
-                    // const transactionRepository = getCustomRepository(TransactionRepository);
-                    // accounts.forEach(accountTransaction => {
-                    //     console.log(`User: ${user.email} - Check Transactions to Account: ${accountToDelete.account_number}.${accountTransaction.account_number} `);
-                    //     let transactionExistResult = transactionRepository.createQueryBuilder()
-                    //                                                     .where("transaction.sender_account = :idSender", { idSender: accountToDelete.account_number })
-                    //                                                     .andWhere("transaction.receiver_account = :idReceiver", { idReceiver: accountTransaction.account_number });
-                        
-                        
-                    //     // findOne({
-                    //     //     sender_account: accountToDelete.account_number,
-                    //     //     receiver_account: accountTransaction.account_number
-                    //     // })
-                    //     if(!transactionExistResult)
-                    //     {
-                    //         console.log(`User: ${user.email} - No Transactions Deleted to ${accountToDelete.account_number} from ${accountTransaction.account_number}`);
-                    //     }
-                    //     else
-                    //     {
-                    //         console.log(`User: ${user.email} - ${transactionExistResult}`)
-                    //         transactionRepository.delete({
-                    //             sender_account: accountToDelete.account_number,
-                    //             receiver_account: accountTransaction.account_number
-                    //         })
-                    //         console.log(`User: ${user.email} - Delete Transactions to ${accountToDelete.account_number} from ${accountTransaction.account_number}`);
-                    //     }
-                    // });
-                    // console.log(`User: ${user.email} - Delete Transactions Finisheed`);
-                    // //Transactions Check and Delete.
-
+                    }
                 });
-
                 //Account Delete Ok.
                 console.log(`User: ${user.email} - Accounts to delete`);
                 await accountRepository.delete({

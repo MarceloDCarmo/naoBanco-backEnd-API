@@ -64,7 +64,7 @@ class TransactionController {
         const { accountNumber, date } = req.params
         const transactionService = new TransactionService()
 
-        const transactions = await transactionService.getTransactionsByDate(parseInt(accountNumber), new Date(date).getTime())
+        const transactions = await transactionService.getTransactionsByDate(parseInt(accountNumber), parseInt(date))
         const transactionsDTO = []
 
         transactions.forEach(transaction => {
@@ -76,9 +76,12 @@ class TransactionController {
 
     async getTransactionsByRangeDate(req: Request, res: Response) {
         const { accountNumber, startDate, endDate } = req.params
+
+        console.log(`Controller: ${accountNumber} ${startDate} ${endDate}\n\n`)
+
         const transactionService = new TransactionService()
 
-        const transactions = await transactionService.getTransactionsByRangeDate(parseInt(accountNumber), new Date(startDate).getTime(), new Date(endDate).getTime())
+        const transactions = await transactionService.getTransactionsByRangeDate(parseInt(accountNumber), parseInt(startDate), parseInt(endDate))
         const transactionsDTO = []
 
         transactions.forEach(transaction => {

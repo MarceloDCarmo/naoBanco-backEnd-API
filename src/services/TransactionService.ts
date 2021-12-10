@@ -38,21 +38,19 @@ class TransactionService {
     async getTransactionsByDate(accountNumber: number, timestamp: number) {
         const transactionRepository = getCustomRepository(TransactionRepository)
 
-        const start = new Date(timestamp).setUTCHours(0, 0, 0, 0)
-        const end = new Date(timestamp).setUTCHours(23, 59, 59, 999)
+        const start = this.prepareDate(timestamp, 'start')
+        const end = this.prepareDate(timestamp, 'end')
 
         return await transactionRepository.findByDate(accountNumber, start, end)
-
     }
 
     async getTransactionsByRangeDate(accountNumber: number, timestampStart: number, timestampEnd: number) {
         const transactionRepository = getCustomRepository(TransactionRepository)
 
-        const start = new Date(timestampStart).setUTCHours(0, 0, 0, 0)
-        const end = new Date(timestampEnd).setUTCHours(23, 59, 59, 999)
+        const start = this.prepareDate(timestampStart, 'start')
+        const end = this.prepareDate(timestampEnd, 'end')
 
         return await transactionRepository.findByDate(accountNumber, start, end)
-
     }
 
     async executeTransfer({ sender, receiver, value, type, message }: ITransaction) {
@@ -172,6 +170,19 @@ class TransactionService {
         if (!id) {
             throw new Error("Invalid transaction id")
         }
+    }
+
+    prepareDate(timestamp: number, type: string){
+        const date = new Date(timestamp).toISOString().split('T')[0]
+        let datePrepared = ''
+
+        if(type == 'start'){
+            datePrepared = date.concat(' 00:00:00.000000')
+        } else {
+            datePrepared = date.concat(' 23:59:59.999999')
+        }
+
+        return datePrepared
     }
 }
 

@@ -154,6 +154,26 @@ class AccountService {
         return accountsDTO
     }
 
+    async getUserByAccount(accountNumber: number) {
+
+        if(!accountNumber){
+            throw new Error("Account number undefined")
+        }
+        const accountRepository = getCustomRepository(AccountRepository)
+        const userRepository = getCustomRepository(UsersRepositories)
+
+        const account =  await accountRepository.findOne(accountNumber)
+
+        if(!account) {
+            throw new Error("Account not found")
+        }
+
+        const user = await userRepository.findOne(account.user)
+
+        return user
+
+    }
+
     toAccountDTO(account: Account) {
         let accDTO: AccountDTO = {
             accountNumber: account.account_number,

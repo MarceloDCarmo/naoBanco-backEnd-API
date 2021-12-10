@@ -34,6 +34,7 @@ router.patch("/user/settings", (userController.updateUser));
 router.get("/user/:email", (userController.getUser));
 router.post("/login", (authenticationService.login));
 router.get("/user/id/:id", userController.getUserById);
+router.get("/user/account/:accountNumber", accountController.getUserByAccount);
 
 //Account
 router.post("/accounts/authenticate", authenticationService.authenticateAccount)

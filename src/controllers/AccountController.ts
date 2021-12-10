@@ -74,6 +74,14 @@ class AccountController {
 
         return res.status(200).json(accounts)
     }
+
+    async getUserByAccount(req: Request, res: Response) {
+        const { accountNumber } = req.params
+
+        const user = await accountService.getUserByAccount(parseInt(accountNumber))
+
+        return res.status(200).json(user)
+    }
 }
 
 export { AccountController }

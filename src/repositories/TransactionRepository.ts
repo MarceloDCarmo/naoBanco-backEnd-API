@@ -8,7 +8,9 @@ class TransactionRepository extends Repository<Transaction>{
 
         return await this.createQueryBuilder('transactions')
         .where("transactions.created_at BETWEEN :start AND :end", { start, end })
-        .andWhere("transactions.sender_account = :accountNumber OR receiver_account = :accountNumber", { accountNumber })
+        .andWhere("transactions.sender_account = :accountNumber", { accountNumber })
+        .orWhere("transactions.created_at BETWEEN :start AND :end", { start, end })
+        .andWhere("transactions.receiver_account = :accountNumber", { accountNumber })
         .getMany()
     }
 

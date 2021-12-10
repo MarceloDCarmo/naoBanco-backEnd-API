@@ -49,6 +49,18 @@ class UserController{
         const userToGet = await userService.getUser(email)
         return response.json(userToGet);
     }
+
+    async getUserById(request: Request, response: Response){
+
+        const {id} = request.params
+        console.log(id)
+        if(!id){
+            return response.status(400).json("Id undefined");
+        }
+        const userService = new UserService();
+        const userToGet = await userService.getUserById(id)
+        return response.json(userToGet);
+    }
 }
 
 export {UserController};

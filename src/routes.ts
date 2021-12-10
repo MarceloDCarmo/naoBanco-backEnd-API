@@ -33,6 +33,7 @@ router.delete("/user", (userController.DeleteAlltoUser));
 router.patch("/user/settings", (userController.updateUser));
 router.get("/user/:email", (userController.getUser));
 router.post("/login", (authenticationService.login));
+router.get("/user/id/:id", userController.getUserById);
 
 //Account
 router.post("/accounts/authenticate", authenticationService.authenticateAccount)

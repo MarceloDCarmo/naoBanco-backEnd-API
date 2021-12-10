@@ -17,9 +17,9 @@ class UserService {
 
     async createUser({name, email, admin, password} : IUserRequest) {
         const usersRepository = getCustomRepository(UsersRepositories);
-
-        if(!email || !name || !password || !admin) {
-            throw new Error("You must provide an email, name, password and admin privilege to create an user account")
+        
+        if(!email){
+            throw new Error("Email Incorrect");
         }
 
         const userAlreadyExists = await usersRepository.findOne({
@@ -82,8 +82,9 @@ class UserService {
                     }else
                     {
                         console.log(`User: ${user.email} - Not found Pix Keys to delete`);
-                    }
+                    }//Pix Check and Delete.
                 });
+
                 //Account Delete Ok.
                 console.log(`User: ${user.email} - Accounts to delete`);
                 await accountRepository.delete({
@@ -165,6 +166,23 @@ class UserService {
             }
             return user;
             
+        }
+        catch(e) {
+            console.log(`Error: ${e.message}`); 
+            throw new Error("Unable to get user: " + e.message);
+        }
+    }
+
+    async getUserById(id: string) {
+        try
+        { 
+            //Get User
+            const userRepository = getCustomRepository(UsersRepositories);
+            const user = await userRepository.findOne(id);
+            if(!user){
+                throw new Error("User not found");
+            }
+            return user;
         }
         catch(e) {
             console.log(`Error: ${e.message}`); 
